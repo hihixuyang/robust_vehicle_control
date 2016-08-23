@@ -12,6 +12,11 @@ The source code in this repository requires:
 
 - [MATLAB R2016a](http://www.mathworks.com/products/matlab/)
 
+and
+
+- [YALMIP Toolbox](http://users.isy.liu.se/johanl/yalmip/)
+- [SeDuMi](http://sedumi.ie.lehigh.edu)
+
 ## Running the examples
 
 The synthesis and simulation are self contrained. To execute them simply type
@@ -23,4 +28,4 @@ The synthesis and simulation are self contrained. To execute them simply type
 
 ## Citing
 
-The paper is currently being rewritten, this section will be updated once its pre-print is available.
+The paper is currently being written, this section will be updated once its pre-print is available.
