@@ -1,4 +1,4 @@
-# A Guaranteed Cost Approach to Robust Model Predictive Control of Uncertain Linear Systems
+# Guaranteed Cost Model Predictive Control for Autonomous Vehicle Trajectory Tracking
 
 This repository contains the MATLAB implementation of the robust controller designed for CaRINA autonomous vehicle. 
 
