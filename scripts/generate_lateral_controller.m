@@ -95,8 +95,9 @@ function controller = generate_lateral_controller(vehicle_parameters, controller
         % Calculate zero DC gain feed-forward term w.r.t crosstrack error
         Ftilda = F - G * K;
         
-        [Flist, Glist] = lct.pu2su(Ftilda, G, H, Ef, Eg);
-        N = lct.rdcgain(Flist, Glist, Gr, Qp(1,:));
+        M1 = (Qp(1,:) / (eye(Nx) - F + G * K)) * Gr;
+        M2 = (Qp(1,:) / (eye(Nx) - F + G * K)) * G;
+        N = M2 \ M1;
         K = [K, N];
 
         % Save related quantities for future gain scheduling
