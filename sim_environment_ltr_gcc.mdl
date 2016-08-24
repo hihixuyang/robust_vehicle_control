@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.457"
+    ComputedModelVersion    "1.460"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -111,11 +111,11 @@ Model {
 	$ObjectID		6
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"101"
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
 	Extents			[1833.0, 1004.0]
-	ZoomFactor		[1.54]
-	Offset			[0.0, 0.0]
+	ZoomFactor		[1.4471384815819306]
+	Offset			[-248.16645169667595, -187.39147333795017]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Aug 22 13:32:19 2016"
-  RTWModifiedTimeStamp	  393773538
-  ModelVersionFormat	  "1.%<AutoIncrement:457>"
+  LastModifiedDate	  "Tue Aug 23 21:58:29 2016"
+  RTWModifiedTimeStamp	  393890309
+  ModelVersionFormat	  "1.%<AutoIncrement:460>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1025,11 +1025,19 @@ Model {
     Block {
       BlockType		      Terminator
     }
+    Block {
+      BlockType		      TransferFcn
+      Numerator		      "[1]"
+      Denominator	      "[1 2 1]"
+      AbsoluteTolerance	      "auto"
+      ContinuousStateAttributes	"''"
+      Realization	      "auto"
+    }
   }
   System {
     Name		    "sim_environment_ltr_gcc"
     Location		    [53, 23, 1920, 1200]
-    Open		    off
+    Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1040,9 +1048,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "152"
+    ZoomFactor		    "145"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "117"
+    SIDHighWatermark	    "126"
     Block {
       BlockType		      SubSystem
       Name		      "Brake System"
@@ -1549,7 +1557,7 @@ Model {
       BlockType		      Clock
       Name		      "Clock"
       SID		      "86"
-      Position		      [-145, 255, -125, 275]
+      Position		      [-235, 255, -215, 275]
       ZOrder		      49
     }
     Block {
@@ -1557,7 +1565,7 @@ Model {
       Name		      "Command Delay1"
       SID		      "89"
       Ports		      [1, 1]
-      Position		      [90, -42, 125, -8]
+      Position		      [0, -42, 35, -8]
       ZOrder		      51
       ShowName		      off
       InputPortMap	      "u0"
@@ -1570,7 +1578,7 @@ Model {
       Name		      "Command Delay3"
       SID		      "91"
       Ports		      [1, 1]
-      Position		      [90, 28, 125, 62]
+      Position		      [0, 28, 35, 62]
       ZOrder		      53
       ShowName		      off
       InputPortMap	      "u0"
@@ -1583,7 +1591,7 @@ Model {
       Name		      "Command Delay4"
       SID		      "98"
       Ports		      [1, 1]
-      Position		      [90, -7, 125, 27]
+      Position		      [0, -7, 35, 27]
       ZOrder		      57
       ShowName		      off
       InputPortMap	      "u0"
@@ -1610,16 +1618,16 @@ Model {
       BlockType		      Constant
       Name		      "Constant1"
       SID		      "61"
-      Position		      [155, 92, 315, 118]
+      Position		      [65, 77, 225, 103]
       ZOrder		      29
       ShowName		      off
-      Value		      "0.5 * vehicle_parameters.body.m"
+      Value		      "0.1"
     }
     Block {
       BlockType		      Constant
       Name		      "Constant2"
       SID		      "53"
-      Position		      [-25, 270, 5, 300]
+      Position		      [-115, 270, -85, 300]
       ZOrder		      25
       ShowName		      off
       Value		      "[1 1]"
@@ -1628,7 +1636,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant3"
       SID		      "95"
-      Position		      [155, 167, 315, 193]
+      Position		      [65, 167, 225, 193]
       ZOrder		      54
       ShowName		      off
       Value		      "0"
@@ -1637,17 +1645,17 @@ Model {
       BlockType		      Fcn
       Name		      "Fcn"
       SID		      "85"
-      Position		      [-55, 240, 5, 270]
+      Position		      [-145, 240, -85, 270]
       ZOrder		      48
       ShowName		      off
-      Expr		      "- sin(2*pi*0.1*u(7)) * 5 / u(4)^2"
+      Expr		      "- sin(2*pi*0*u(7)) * 5 / u(4)^2"
     }
     Block {
       BlockType		      SubSystem
       Name		      "GPS Sensor"
       SID		      "106"
       Ports		      [1, 1]
-      Position		      [-80, -48, 30, -2]
+      Position		      [-170, -48, -60, -2]
       ZOrder		      60
       LibraryVersion	      "1.32"
       ErrorFcn		      "Stateflow.Translate.translate"
@@ -1761,14 +1769,14 @@ Model {
       Name		      "Lateral Controller/Observer"
       SID		      "101"
       Ports		      [3, 1]
-      Position		      [160, -41, 310, 61]
+      Position		      [70, -41, 220, 61]
       ZOrder		      -35
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"Lateral Controller/Observer"
 	Location		[53, 23, 1920, 1200]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -2290,7 +2298,7 @@ Model {
       Name		      "Mux2"
       SID		      "87"
       Ports		      [2, 1]
-      Position		      [-85, 236, -80, 274]
+      Position		      [-175, 236, -170, 274]
       ZOrder		      50
       ShowName		      off
       Inputs		      "2"
@@ -2298,15 +2306,15 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Powertrain System"
-      SID		      "42"
-      Ports		      [1, 1]
+      Name		      "Powertrain System1"
+      SID		      "118"
+      Ports		      [2, 1]
       Position		      [370, 76, 600, 134]
-      ZOrder		      21
+      ZOrder		      61
       RequestExecContextInheritance off
       Variant		      off
       System {
-	Name			"Powertrain System"
+	Name			"Powertrain System1"
 	Location		[53, 23, 1920, 1200]
 	Open			off
 	ModelBrowserVisibility	off
@@ -2319,28 +2327,310 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"238"
 	Block {
 	  BlockType		  Inport
-	  Name			  "throttle_s"
-	  SID			  "43"
+	  Name			  "throttle_cmd_s"
+	  SID			  "119"
 	  Position		  [110, 103, 140, 117]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Inport
+	  Name			  "x_v6"
+	  SID			  "120"
+	  Position		  [110, 138, 140, 152]
+	  ZOrder		  18
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Delay
+	  Name			  "Command Delay"
+	  SID			  "121"
+	  Ports			  [1, 1]
+	  Position		  [290, 93, 325, 127]
+	  ZOrder		  29
+	  InputPortMap		  "u0"
+	  DelayLength		  "1"
+	  InitialCondition	  "0"
+	  SampleTime		  "vehicle_parameters.powertrain.delay"
+	}
+	Block {
+	  BlockType		  Delay
+	  Name			  "Gearshift Delay"
+	  SID			  "122"
+	  Ports			  [1, 1]
+	  Position		  [435, 228, 470, 262]
+	  ZOrder		  27
+	  BlockMirror		  on
+	  InputPortMap		  "u0"
+	  DelayLength		  "1"
+	  InitialCondition	  "0"
+	  SampleTime		  "vehicle_parameters.powertrain.gear_shift_delay"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Lateral Controllers"
+	  SID			  "123"
+	  Ports			  [3, 2]
+	  Position		  [370, 89, 540, 201]
+	  ZOrder		  24
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  SFBlockType		  "MATLAB Function"
+	  Variant		  off
+	  System {
+	    Name		    "Lateral Controllers"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "29"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "throttle_s"
+	      SID		      "123::20"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      11
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "x_v6"
+	      SID		      "123::19"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      10
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "gear_s"
+	      SID		      "123::28"
+	      Position		      [20, 171, 40, 189]
+	      ZOrder		      17
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "123::17"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      8
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "123::16"
+	      Tag		      "Stateflow S-Function sim_environment_ltr_gcc 5"
+	      Ports		      [3, 3]
+	      Position		      [180, 120, 230, 200]
+	      ZOrder		      7
+	      FunctionName	      "sf_sfun"
+	      Parameters	      "vehicle_parameters"
+	      PortCounts	      "[3 3]"
+	      SFunctionDeploymentMode off
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"fxf_s"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"gear_next_s"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "123::18"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      9
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "fxf_s"
+	      SID		      "123::25"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      16
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "gear_next_s"
+	      SID		      "123::29"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      18
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      1
+	      SrcBlock		      "throttle_s"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      2
+	      SrcBlock		      "x_v6"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      3
+	      SrcBlock		      "gear_s"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "fxf_s"
+	      ZOrder		      4
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "fxf_s"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "gear_next_s"
+	      ZOrder		      5
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "gear_next_s"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      6
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      7
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Nonlinear Second-Order Actuator"
+	  SID			  "124"
+	  Ports			  [1, 1]
+	  Position		  [590, 99, 690, 141]
+	  ZOrder		  17
+	  LibraryVersion	  "1.78"
+	  SourceBlock		  "aerolibactuator/Nonlinear Second-Order Actuator"
+	  SourceType		  "NonlinearSecondOrderActuator"
+	  ContentPreviewEnabled	  off
+	  wn_fin		  "2 * pi / vehicle_parameters.powertrain.engine_tc"
+	  z_fin			  "1"
+	  fin_max		  "Inf"
+	  fin_min		  "-Inf"
+	  fin_maxrate		  "Inf"
+	  fin_act_0		  "0"
+	  fin_act_vel		  "0"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Throttle Filter"
+	  SID			  "125"
+	  Position		  [180, 92, 240, 128]
+	  ZOrder		  26
+	  Denominator		  "[vehicle_parameters.powertrain.throttle_tc/2/pi 1]"
+	}
+	Block {
 	  BlockType		  Outport
 	  Name			  "front_powertrain_force_s"
-	  SID			  "46"
-	  Position		  [360, 103, 390, 117]
+	  SID			  "126"
+	  Position		  [780, 113, 810, 127]
 	  ZOrder		  -2
 	  IconDisplay		  "Port number"
 	}
 	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Lateral Controllers"
+	  SrcPort		  1
+	  DstBlock		  "Nonlinear Second-Order Actuator"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "throttle_cmd_s"
+	  SrcPort		  1
+	  DstBlock		  "Throttle Filter"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "Throttle Filter"
+	  SrcPort		  1
+	  DstBlock		  "Command Delay"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  "Lateral Controllers"
+	  SrcPort		  2
+	  Points		  [9, 0; 0, 70]
+	  DstBlock		  "Gearshift Delay"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  5
+	  SrcBlock		  "Gearshift Delay"
+	  SrcPort		  1
+	  Points		  [-75, 0]
+	  DstBlock		  "Lateral Controllers"
+	  DstPort		  3
+	}
+	Line {
 	  ZOrder		  6
-	  SrcBlock		  "throttle_s"
+	  SrcBlock		  "Nonlinear Second-Order Actuator"
 	  SrcPort		  1
 	  DstBlock		  "front_powertrain_force_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "x_v6"
+	  SrcPort		  1
+	  DstBlock		  "Lateral Controllers"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Command Delay"
+	  SrcPort		  1
+	  DstBlock		  "Lateral Controllers"
 	  DstPort		  1
 	}
       }
@@ -2469,17 +2759,27 @@ Model {
       ZOrder		      45
       SrcBlock		      "Chassis"
       SrcPort		      1
-      Points		      [13, 0; 0, -331; -1086, 0; 0, 51]
+      Points		      [13, 0; 0, -345; -654, 0]
       Branch {
-	ZOrder			456
-	Points			[0, 270]
-	DstBlock		"Mux2"
-	DstPort			1
+	ZOrder			484
+	Points			[0, 210]
+	DstBlock		"Powertrain System1"
+	DstPort			2
       }
       Branch {
-	ZOrder			403
-	DstBlock		"GPS Sensor"
-	DstPort			1
+	ZOrder			482
+	Points			[-522, 0; 0, 65]
+	Branch {
+	  ZOrder		  456
+	  Points		  [0, 270]
+	  DstBlock		  "Mux2"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  403
+	  DstBlock		  "GPS Sensor"
+	  DstPort		  1
+	}
       }
     }
     Line {
@@ -2526,8 +2826,8 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      54
-      SrcBlock		      "Powertrain System"
+      ZOrder		      480
+      SrcBlock		      "Powertrain System1"
       SrcPort		      1
       Points		      [70, 0]
       DstBlock		      "Sum"
@@ -2548,7 +2848,7 @@ Model {
       }
       Branch {
 	ZOrder			279
-	Points			[0, -124; -664, 0; 0, 124]
+	Points			[0, -79; -755, 0; 0, 79]
 	DstBlock		"Command Delay4"
 	DstPort			1
       }
@@ -2561,10 +2861,10 @@ Model {
       DstPort		      3
     }
     Line {
-      ZOrder		      104
+      ZOrder		      481
       SrcBlock		      "Constant1"
       SrcPort		      1
-      DstBlock		      "Powertrain System"
+      DstBlock		      "Powertrain System1"
       DstPort		      1
     }
     Line {
@@ -2682,7 +2982,7 @@ Stateflow {
     name		    "sim_environment_ltr_gcc"
     created		    "05-Aug-2016 10:42:47"
     isLibrary		    0
-    firstTarget		    45
+    firstTarget		    56
     sfVersion		    80000006
   }
   chart {
@@ -3110,7 +3410,10 @@ Stateflow {
     firstTransition	    35
     firstJunction	    34
     viewObj		    24
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    17
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3498,8 +3801,220 @@ Stateflow {
     machine		    1
     chart		    37
   }
-  target {
+  chart {
     id			    45
+    name		    "Powertrain System1/Lateral Controllers"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 46 0 0]
+    firstTransition	    54
+    firstJunction	    53
+    viewObj		    45
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    15
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    47
+    chartFileNumber	    5
+    disableImplicitCasting  1
+    eml {
+      name		      "powertrain_model_wrapper"
+    }
+  }
+  state {
+    id			    46
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    45
+    treeNode		    [45 0 0 0]
+    superState		    SUBCHART
+    subviewer		    45
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [fxf_s, gear_next_s] = powertrain_model_wrapper(throttle_s, x_v6, gear_s, vehicle_parame"
+      "ters)\n\n    [fxf_s, gear_next_s] = powertrain_model(throttle_s, x_v6, gear_s, vehicle_parameters.powertrain);\n"
+      "    \nend"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    47
+    ssIdNumber		    7
+    name		    "throttle_s"
+    linkNode		    [45 0 48]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    48
+    ssIdNumber		    6
+    name		    "x_v6"
+    linkNode		    [45 47 49]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    49
+    ssIdNumber		    14
+    name		    "gear_s"
+    linkNode		    [45 48 50]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    50
+    ssIdNumber		    4
+    name		    "fxf_s"
+    linkNode		    [45 49 51]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    51
+    ssIdNumber		    8
+    name		    "vehicle_parameters"
+    linkNode		    [45 50 52]
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    52
+    ssIdNumber		    15
+    name		    "gear_next_s"
+    linkNode		    [45 51 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    53
+    position		    [23.5747 49.5747 7]
+    chart		    45
+    linkNode		    [45 0 0]
+    subviewer		    45
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    54
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      53
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    45
+    linkNode		    [45 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    45
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    55
+    name		    "Powertrain System1/Lateral Controllers"
+    machine		    1
+    chart		    45
+  }
+  target {
+    id			    56
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
