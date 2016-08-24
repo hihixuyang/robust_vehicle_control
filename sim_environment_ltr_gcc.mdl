@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.460"
+    ComputedModelVersion    "1.461"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Aug 23 21:58:29 2016"
-  RTWModifiedTimeStamp	  393890309
-  ModelVersionFormat	  "1.%<AutoIncrement:460>"
+  LastModifiedDate	  "Tue Aug 23 22:45:11 2016"
+  RTWModifiedTimeStamp	  393890404
+  ModelVersionFormat	  "1.%<AutoIncrement:461>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1648,7 +1648,7 @@ Model {
       Position		      [-145, 240, -85, 270]
       ZOrder		      48
       ShowName		      off
-      Expr		      "- sin(2*pi*0*u(7)) * 5 / u(4)^2"
+      Expr		      "- sin(2*pi*0.1*u(7)) * 5 / u(4)^2"
     }
     Block {
       BlockType		      SubSystem
@@ -3668,7 +3668,10 @@ Stateflow {
     firstTransition	    43
     firstJunction	    42
     viewObj		    37
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    13
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
