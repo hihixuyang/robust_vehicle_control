@@ -59,9 +59,34 @@ vehicle_parameters.steering.tc = 1/3;
 vehicle_parameters.steering.rate_limit = 19.04 * pi / 180;
 vehicle_parameters.steering.angle_limit = 24 * pi / 180;
 
+% Powertrain params
+vehicle_parameters.powertrain.delay = 0.15;
+vehicle_parameters.powertrain.wheel_radius = 0.33;
+vehicle_parameters.powertrain.gear_shift_delay = 0.4;
+vehicle_parameters.powertrain.gear_ratio = [-3.168 0 3.538 2.06 1.404 1 0.713 0.582];
+vehicle_parameters.powertrain.diff_ratio = 4.1;
+vehicle_parameters.powertrain.efficiency = 0.90;
+vehicle_parameters.powertrain.throttle_tc = 0.5;
+vehicle_parameters.powertrain.engine_tc = 1;
+vehicle_parameters.powertrain.engine_rpm_map = [0; 86.6670; 173.330; 433.330; 750; 866.670; ...
+                                                1300; 1733.30; 2166.70; 2600; 3033.30; 3466.70; ...
+                                                3900; 4333.30; 4766.70; 5200; 5633.30; 6066.70; ...
+                                                6500];
+vehicle_parameters.powertrain.engine_torque_map = [0; 88.7680; 127.540; 179.630; 194.890; ...
+                                                   210.250; 229.70; 235.90; 243.460; 262.660; ...
+                                                   267.30; 252.230; 254.950; 253.60; 244.640; ...
+                                                   229.370; 207.420; 182.70; -61.60];
+
 % Brake System params
+vehicle_parameters.brake.delay = 0.15;
 vehicle_parameters.brake.front_ratio = 0.7;
 vehicle_parameters.brake.rear_ratio = 0.3;
+vehicle_parameters.brake.actuator_tc = 1;
+vehicle_parameters.brake.rate_limit = 1.4;
+vehicle_parameters.brake.mc_pressure_to_torque = 620;
+vehicle_parameters.brake.pedal_to_mc_pressure = 15;
+vehicle_parameters.brake.hydraulic_ts = 0.15;
+vehicle_parameters.brake.wheel_radius = 0.33;
 
 % World params
 vehicle_parameters.world.g = 9.81;
