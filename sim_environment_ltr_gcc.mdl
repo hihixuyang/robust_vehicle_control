@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.461"
+    ComputedModelVersion    "1.462"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -115,7 +115,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1833.0, 1004.0]
 	ZoomFactor		[1.4471384815819306]
-	Offset			[-248.16645169667595, -187.39147333795017]
+	Offset			[-248.16645169667572, -187.39147333795017]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Aug 23 22:45:11 2016"
-  RTWModifiedTimeStamp	  393890404
-  ModelVersionFormat	  "1.%<AutoIncrement:461>"
+  LastModifiedDate	  "Wed Aug 24 19:01:12 2016"
+  RTWModifiedTimeStamp	  393966067
+  ModelVersionFormat	  "1.%<AutoIncrement:462>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -976,6 +976,21 @@ Model {
       PortCounts	      "[]"
     }
     Block {
+      BlockType		      Saturate
+      UpperLimitSource	      "Dialog"
+      UpperLimit	      "0.5"
+      LowerLimitSource	      "Dialog"
+      LowerLimit	      "-0.5"
+      LinearizeAsGain	      on
+      ZeroCross		      on
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -1050,14 +1065,14 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "145"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "126"
+    SIDHighWatermark	    "140"
     Block {
       BlockType		      SubSystem
       Name		      "Brake System"
-      SID		      "36"
+      SID		      "129"
       Ports		      [1, 2]
       Position		      [370, 151, 600, 209]
-      ZOrder		      20
+      ZOrder		      62
       RequestExecContextInheritance off
       Variant		      off
       Port {
@@ -1083,17 +1098,68 @@ Model {
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
-	  Name			  "master_cylinder_pressure_s"
-	  SID			  "37"
+	  Name			  "brake_pedal_cmd_s"
+	  SID			  "130"
 	  Position		  [110, 103, 140, 117]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Delay
+	  Name			  "Command Delay"
+	  SID			  "131"
+	  Ports			  [1, 1]
+	  Position		  [235, 93, 270, 127]
+	  ZOrder		  32
+	  InputPortMap		  "u0"
+	  DelayLength		  "1"
+	  InitialCondition	  "0"
+	  SampleTime		  "vehicle_parameters.brake.delay"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Nonlinear Second-Order Actuator"
+	  SID			  "132"
+	  Ports			  [1, 1]
+	  Position		  [325, 93, 425, 127]
+	  ZOrder		  33
+	  LibraryVersion	  "1.78"
+	  SourceBlock		  "aerolibactuator/Nonlinear Second-Order Actuator"
+	  SourceType		  "NonlinearSecondOrderActuator"
+	  ContentPreviewEnabled	  off
+	  wn_fin		  "2 * pi / vehicle_parameters.brake.actuator_tc"
+	  z_fin			  "1"
+	  fin_max		  "1"
+	  fin_min		  "0"
+	  fin_maxrate		  "vehicle_parameters.brake.rate_limit"
+	  fin_act_0		  "0"
+	  fin_act_vel		  "0"
+	}
+	Block {
+	  BlockType		  Saturate
+	  Name			  "Saturation"
+	  SID			  "133"
+	  Ports			  [1, 1]
+	  Position		  [175, 95, 205, 125]
+	  ZOrder		  31
+	  ShowName		  off
+	  InputPortMap		  "u0"
+	  UpperLimit		  "1"
+	  LowerLimit		  "0"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  SID			  "134"
+	  Position		  [670, 94, 730, 126]
+	  ZOrder		  35
+	  Denominator		  "[2 * pi / vehicle_parameters.brake.hydraulic_ts, 1]"
+	}
+	Block {
 	  BlockType		  Gain
 	  Name			  "front_ratio"
-	  SID			  "40"
-	  Position		  [225, 95, 255, 125]
+	  SID			  "135"
+	  Position		  [780, 95, 810, 125]
 	  ZOrder		  2
 	  Gain			  "-vehicle_parameters.brake.front_ratio"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -1102,9 +1168,31 @@ Model {
 	}
 	Block {
 	  BlockType		  Gain
+	  Name			  "pedal_to_pressure"
+	  SID			  "136"
+	  Position		  [490, 95, 520, 125]
+	  ZOrder		  36
+	  Gain			  "vehicle_parameters.brake.pedal_to_mc_pressure"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "pressure_to_force"
+	  SID			  "137"
+	  Position		  [595, 95, 625, 125]
+	  ZOrder		  34
+	  Gain			  "vehicle_parameters.brake.mc_pressure_to_torque / vehicle_parameters.brake.wheel_radius"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
 	  Name			  "rear_ratio"
-	  SID			  "41"
-	  Position		  [225, 155, 255, 185]
+	  SID			  "138"
+	  Position		  [780, 155, 810, 185]
 	  ZOrder		  3
 	  Gain			  "-vehicle_parameters.brake.front_ratio"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -1114,49 +1202,91 @@ Model {
 	Block {
 	  BlockType		  Outport
 	  Name			  "front_brake_force_s"
-	  SID			  "38"
-	  Position		  [360, 103, 390, 117]
+	  SID			  "139"
+	  Position		  [870, 103, 900, 117]
 	  ZOrder		  -2
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "rear_brake_force_s"
-	  SID			  "39"
-	  Position		  [360, 163, 390, 177]
+	  SID			  "140"
+	  Position		  [870, 163, 900, 177]
 	  ZOrder		  1
 	  Port			  "2"
 	  IconDisplay		  "Port number"
 	}
 	Line {
 	  ZOrder		  1
-	  SrcBlock		  "master_cylinder_pressure_s"
+	  SrcBlock		  "brake_pedal_cmd_s"
 	  SrcPort		  1
-	  Points		  [52, 0]
-	  Branch {
-	    ZOrder		    4
-	    DstBlock		    "front_ratio"
-	    DstPort		    1
-	  }
-	  Branch {
-	    ZOrder		    3
-	    Points		    [0, 60]
-	    DstBlock		    "rear_ratio"
-	    DstPort		    1
-	  }
+	  DstBlock		  "Saturation"
+	  DstPort		  1
 	}
 	Line {
-	  ZOrder		  6
+	  ZOrder		  2
 	  SrcBlock		  "front_ratio"
 	  SrcPort		  1
 	  DstBlock		  "front_brake_force_s"
 	  DstPort		  1
 	}
 	Line {
-	  ZOrder		  7
+	  ZOrder		  3
 	  SrcBlock		  "rear_ratio"
 	  SrcPort		  1
 	  DstBlock		  "rear_brake_force_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  "Saturation"
+	  SrcPort		  1
+	  DstBlock		  "Command Delay"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  5
+	  SrcBlock		  "Nonlinear Second-Order Actuator"
+	  SrcPort		  1
+	  DstBlock		  "pedal_to_pressure"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  6
+	  SrcBlock		  "Command Delay"
+	  SrcPort		  1
+	  DstBlock		  "Nonlinear Second-Order Actuator"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "pressure_to_force"
+	  SrcPort		  1
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [17, 0]
+	  Branch {
+	    ZOrder		    9
+	    Points		    [0, 60]
+	    DstBlock		    "rear_ratio"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    10
+	    DstBlock		    "front_ratio"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "pedal_to_pressure"
+	  SrcPort		  1
+	  DstBlock		  "pressure_to_force"
 	  DstPort		  1
 	}
       }
@@ -2306,7 +2436,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Powertrain System1"
+      Name		      "Powertrain System"
       SID		      "118"
       Ports		      [2, 1]
       Position		      [370, 76, 600, 134]
@@ -2314,7 +2444,7 @@ Model {
       RequestExecContextInheritance off
       Variant		      off
       System {
-	Name			"Powertrain System1"
+	Name			"Powertrain System"
 	Location		[53, 23, 1920, 1200]
 	Open			off
 	ModelBrowserVisibility	off
@@ -2652,7 +2782,7 @@ Model {
       }
       System {
 	Name			"Steering System"
-	Location		[53, 23, 2560, 1440]
+	Location		[53, 23, 1920, 1200]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2763,7 +2893,7 @@ Model {
       Branch {
 	ZOrder			484
 	Points			[0, 210]
-	DstBlock		"Powertrain System1"
+	DstBlock		"Powertrain System"
 	DstPort			2
       }
       Branch {
@@ -2810,7 +2940,7 @@ Model {
     }
     Line {
       Name		      "rear_tire_force_s"
-      ZOrder		      53
+      ZOrder		      510
       Labels		      [1, 1]
       SrcBlock		      "Brake System"
       SrcPort		      2
@@ -2818,7 +2948,7 @@ Model {
       DstPort		      4
     }
     Line {
-      ZOrder		      52
+      ZOrder		      511
       SrcBlock		      "Brake System"
       SrcPort		      1
       Points		      [70, 0]
@@ -2827,7 +2957,7 @@ Model {
     }
     Line {
       ZOrder		      480
-      SrcBlock		      "Powertrain System1"
+      SrcBlock		      "Powertrain System"
       SrcPort		      1
       Points		      [70, 0]
       DstBlock		      "Sum"
@@ -2864,7 +2994,7 @@ Model {
       ZOrder		      481
       SrcBlock		      "Constant1"
       SrcPort		      1
-      DstBlock		      "Powertrain System1"
+      DstBlock		      "Powertrain System"
       DstPort		      1
     }
     Line {
@@ -2900,7 +3030,7 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      267
+      ZOrder		      512
       SrcBlock		      "Constant3"
       SrcPort		      1
       DstBlock		      "Brake System"
@@ -3410,10 +3540,7 @@ Stateflow {
     firstTransition	    35
     firstJunction	    34
     viewObj		    24
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    17
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3668,10 +3795,7 @@ Stateflow {
     firstTransition	    43
     firstJunction	    42
     viewObj		    37
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    13
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3806,7 +3930,7 @@ Stateflow {
   }
   chart {
     id			    45
-    name		    "Powertrain System1/Lateral Controllers"
+    name		    "Powertrain System/Lateral Controllers"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
@@ -3815,8 +3939,6 @@ Stateflow {
     firstJunction	    53
     viewObj		    45
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    15
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -4012,7 +4134,7 @@ Stateflow {
   }
   instance {
     id			    55
-    name		    "Powertrain System1/Lateral Controllers"
+    name		    "Powertrain System/Lateral Controllers"
     machine		    1
     chart		    45
   }

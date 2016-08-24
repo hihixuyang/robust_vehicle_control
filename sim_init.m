@@ -78,8 +78,15 @@ vehicle_parameters.powertrain.engine_torque_map = [0; 88.7680; 127.540; 179.630;
                                                    229.370; 207.420; 182.70; -61.60];
 
 % Brake System params
+vehicle_parameters.brake.delay = 0.15;
 vehicle_parameters.brake.front_ratio = 0.7;
 vehicle_parameters.brake.rear_ratio = 0.3;
+vehicle_parameters.brake.actuator_tc = 1;
+vehicle_parameters.brake.rate_limit = 1.4;
+vehicle_parameters.brake.mc_pressure_to_torque = 620;
+vehicle_parameters.brake.pedal_to_mc_pressure = 15;
+vehicle_parameters.brake.hydraulic_ts = 0.15;
+vehicle_parameters.brake.wheel_radius = 0.33;
 
 % World params
 vehicle_parameters.world.g = 9.81;

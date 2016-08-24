@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.404"
+    ComputedModelVersion    "1.408"
     NumModelReferences	    0
     NumTestPointedSignals   5
     TestPointedSignal {
@@ -102,7 +102,7 @@ Model {
 	  LoadSaveID		  "0"
 	  Extents		  [1833.0, 1004.0]
 	  ZoomFactor		  [1.6083200490069818]
-	  Offset		  [-122.19692261080343, -124.62693040166045]
+	  Offset		  [-122.19692261080343, -124.62693040166033]
 	}
 	Object {
 	  $ObjectID		  7
@@ -132,9 +132,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Aug 23 22:00:07 2016"
-  RTWModifiedTimeStamp	  393890406
-  ModelVersionFormat	  "1.%<AutoIncrement:404>"
+  LastModifiedDate	  "Wed Aug 24 19:01:11 2016"
+  RTWModifiedTimeStamp	  393965917
+  ModelVersionFormat	  "1.%<AutoIncrement:408>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -983,6 +983,21 @@ Model {
       PortCounts	      "[]"
     }
     Block {
+      BlockType		      Saturate
+      UpperLimitSource	      "Dialog"
+      UpperLimit	      "0.5"
+      LowerLimitSource	      "Dialog"
+      LowerLimit	      "-0.5"
+      LinearizeAsGain	      on
+      ZeroCross		      on
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -1057,7 +1072,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "161"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "104"
+    SIDHighWatermark	    "111"
     Block {
       BlockType		      SubSystem
       Name		      "Brake System"
@@ -1097,10 +1112,61 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Delay
+	  Name			  "Command Delay"
+	  SID			  "107"
+	  Ports			  [1, 1]
+	  Position		  [235, 93, 270, 127]
+	  ZOrder		  32
+	  InputPortMap		  "u0"
+	  DelayLength		  "1"
+	  InitialCondition	  "0"
+	  SampleTime		  "vehicle_parameters.brake.delay"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Nonlinear Second-Order Actuator"
+	  SID			  "108"
+	  Ports			  [1, 1]
+	  Position		  [325, 93, 425, 127]
+	  ZOrder		  33
+	  LibraryVersion	  "1.78"
+	  SourceBlock		  "aerolibactuator/Nonlinear Second-Order Actuator"
+	  SourceType		  "NonlinearSecondOrderActuator"
+	  ContentPreviewEnabled	  off
+	  wn_fin		  "2 * pi / vehicle_parameters.brake.actuator_tc"
+	  z_fin			  "1"
+	  fin_max		  "1"
+	  fin_min		  "0"
+	  fin_maxrate		  "vehicle_parameters.brake.rate_limit"
+	  fin_act_0		  "0"
+	  fin_act_vel		  "0"
+	}
+	Block {
+	  BlockType		  Saturate
+	  Name			  "Saturation"
+	  SID			  "106"
+	  Ports			  [1, 1]
+	  Position		  [175, 95, 205, 125]
+	  ZOrder		  31
+	  ShowName		  off
+	  InputPortMap		  "u0"
+	  UpperLimit		  "1"
+	  LowerLimit		  "0"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  SID			  "110"
+	  Position		  [670, 94, 730, 126]
+	  ZOrder		  35
+	  Denominator		  "[2 * pi / vehicle_parameters.brake.hydraulic_ts, 1]"
+	}
+	Block {
 	  BlockType		  Gain
 	  Name			  "front_ratio"
 	  SID			  "40"
-	  Position		  [225, 95, 255, 125]
+	  Position		  [780, 95, 810, 125]
 	  ZOrder		  2
 	  Gain			  "-vehicle_parameters.brake.front_ratio"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -1109,9 +1175,31 @@ Model {
 	}
 	Block {
 	  BlockType		  Gain
+	  Name			  "pedal_to_pressure"
+	  SID			  "111"
+	  Position		  [490, 95, 520, 125]
+	  ZOrder		  36
+	  Gain			  "vehicle_parameters.brake.pedal_to_mc_pressure"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "pressure_to_force"
+	  SID			  "109"
+	  Position		  [595, 95, 625, 125]
+	  ZOrder		  34
+	  Gain			  "vehicle_parameters.brake.mc_pressure_to_torque / vehicle_parameters.brake.wheel_radius"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
 	  Name			  "rear_ratio"
 	  SID			  "41"
-	  Position		  [225, 155, 255, 185]
+	  Position		  [780, 155, 810, 185]
 	  ZOrder		  3
 	  Gain			  "-vehicle_parameters.brake.front_ratio"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -1122,7 +1210,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "front_brake_force_s"
 	  SID			  "38"
-	  Position		  [360, 103, 390, 117]
+	  Position		  [870, 103, 900, 117]
 	  ZOrder		  -2
 	  IconDisplay		  "Port number"
 	}
@@ -1130,7 +1218,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "rear_brake_force_s"
 	  SID			  "39"
-	  Position		  [360, 163, 390, 177]
+	  Position		  [870, 163, 900, 177]
 	  ZOrder		  1
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -1139,18 +1227,8 @@ Model {
 	  ZOrder		  1
 	  SrcBlock		  "brake_pedal_cmd_s"
 	  SrcPort		  1
-	  Points		  [52, 0]
-	  Branch {
-	    ZOrder		    4
-	    DstBlock		    "front_ratio"
-	    DstPort		    1
-	  }
-	  Branch {
-	    ZOrder		    3
-	    Points		    [0, 60]
-	    DstBlock		    "rear_ratio"
-	    DstPort		    1
-	  }
+	  DstBlock		  "Saturation"
+	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  6
@@ -1164,6 +1242,58 @@ Model {
 	  SrcBlock		  "rear_ratio"
 	  SrcPort		  1
 	  DstBlock		  "rear_brake_force_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Saturation"
+	  SrcPort		  1
+	  DstBlock		  "Command Delay"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  9
+	  SrcBlock		  "Nonlinear Second-Order Actuator"
+	  SrcPort		  1
+	  DstBlock		  "pedal_to_pressure"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  10
+	  SrcBlock		  "Command Delay"
+	  SrcPort		  1
+	  DstBlock		  "Nonlinear Second-Order Actuator"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "pressure_to_force"
+	  SrcPort		  1
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  12
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [17, 0]
+	  Branch {
+	    ZOrder		    17
+	    Points		    [0, 60]
+	    DstBlock		    "rear_ratio"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    16
+	    DstBlock		    "front_ratio"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "pedal_to_pressure"
+	  SrcPort		  1
+	  DstBlock		  "pressure_to_force"
 	  DstPort		  1
 	}
       }
@@ -1842,7 +1972,7 @@ Model {
 	  Name			  "Command Delay"
 	  SID			  "104"
 	  Ports			  [1, 1]
-	  Position		  [290, 93, 325, 127]
+	  Position		  [310, 93, 345, 127]
 	  ZOrder		  29
 	  InputPortMap		  "u0"
 	  DelayLength		  "1"
@@ -2052,10 +2182,22 @@ Model {
 	  fin_act_vel		  "0"
 	}
 	Block {
+	  BlockType		  Saturate
+	  Name			  "Saturation"
+	  SID			  "105"
+	  Ports			  [1, 1]
+	  Position		  [165, 95, 195, 125]
+	  ZOrder		  30
+	  ShowName		  off
+	  InputPortMap		  "u0"
+	  UpperLimit		  "1"
+	  LowerLimit		  "0"
+	}
+	Block {
 	  BlockType		  TransferFcn
 	  Name			  "Throttle Filter"
 	  SID			  "102"
-	  Position		  [180, 92, 240, 128]
+	  Position		  [220, 92, 280, 128]
 	  ZOrder		  26
 	  Denominator		  "[vehicle_parameters.powertrain.throttle_tc/2/pi 1]"
 	}
@@ -2078,7 +2220,7 @@ Model {
 	  ZOrder		  22
 	  SrcBlock		  "throttle_cmd_s"
 	  SrcPort		  1
-	  DstBlock		  "Throttle Filter"
+	  DstBlock		  "Saturation"
 	  DstPort		  1
 	}
 	Line {
@@ -2123,6 +2265,13 @@ Model {
 	  SrcBlock		  "Command Delay"
 	  SrcPort		  1
 	  DstBlock		  "Lateral Controllers"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  29
+	  SrcBlock		  "Saturation"
+	  SrcPort		  1
+	  DstBlock		  "Throttle Filter"
 	  DstPort		  1
 	}
       }
