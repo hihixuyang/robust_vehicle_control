@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.462"
+    ComputedModelVersion    "1.463"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -111,11 +111,11 @@ Model {
 	$ObjectID		6
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"101"
 	Extents			[1833.0, 1004.0]
-	ZoomFactor		[1.4471384815819306]
-	Offset			[-248.16645169667572, -187.39147333795017]
+	ZoomFactor		[1.54]
+	Offset			[0.0, 0.0]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Aug 24 19:01:12 2016"
-  RTWModifiedTimeStamp	  393966067
-  ModelVersionFormat	  "1.%<AutoIncrement:462>"
+  LastModifiedDate	  "Thu Aug 25 01:11:42 2016"
+  RTWModifiedTimeStamp	  393988301
+  ModelVersionFormat	  "1.%<AutoIncrement:463>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1052,7 +1052,7 @@ Model {
   System {
     Name		    "sim_environment_ltr_gcc"
     Location		    [53, 23, 1920, 1200]
-    Open		    on
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1906,7 +1906,7 @@ Model {
       System {
 	Name			"Lateral Controller/Observer"
 	Location		[53, 23, 1920, 1200]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -3125,7 +3125,10 @@ Stateflow {
     firstTransition	    9
     firstJunction	    8
     viewObj		    2
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    13
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3151,7 +3154,7 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function u_s = gcc_control_wrapper(x_v6, kappa_s, controller)\n\n    u_s = gcc_control(x_v6, kapp"
-      "a_s, controller);\n    \nend"
+      "a_s, controller.lateral);\n    \nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }

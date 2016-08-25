@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.408"
+    ComputedModelVersion    "1.409"
     NumModelReferences	    0
     NumTestPointedSignals   5
     TestPointedSignal {
@@ -102,7 +102,7 @@ Model {
 	  LoadSaveID		  "0"
 	  Extents		  [1833.0, 1004.0]
 	  ZoomFactor		  [1.6083200490069818]
-	  Offset		  [-122.19692261080343, -124.62693040166033]
+	  Offset		  [-122.19692261080343, -124.62693040166022]
 	}
 	Object {
 	  $ObjectID		  7
@@ -132,9 +132,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Aug 24 19:01:11 2016"
-  RTWModifiedTimeStamp	  393965917
-  ModelVersionFormat	  "1.%<AutoIncrement:408>"
+  LastModifiedDate	  "Thu Aug 25 01:11:29 2016"
+  RTWModifiedTimeStamp	  393988287
+  ModelVersionFormat	  "1.%<AutoIncrement:409>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -2613,7 +2613,10 @@ Stateflow {
     firstTransition	    9
     firstJunction	    8
     viewObj		    2
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    13
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -2639,7 +2642,7 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function u_s = gcc_control_wrapper(x_v6, kappa_s, controller)\n\n    u_s = gcc_control(x_v6, kapp"
-      "a_s, controller);\n    \nend"
+      "a_s, controller.lateral);\n    \nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }

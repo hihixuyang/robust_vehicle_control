@@ -128,7 +128,7 @@ observer_parameters.subsampling = 2;
 
 % Observer parameters
 observer_parameters.rho = 1e-4;
-observer_parameters.C = eye(3,4);
+observer_parameters.C = eye(2,4);
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -143,7 +143,7 @@ simulation_parameters.x0 = [0; 0; 0; 10; 0; 0];
 % GPS parameters
 simulation_parameters.gps = struct();
 simulation_parameters.gps.C = [zeros(4,1) eye(4,5)];
-simulation_parameters.gps.Cov = diag([0.04, 0.5*pi/180, 0.006, 0.006]) ^ 2;
+simulation_parameters.gps.Cov = diag([0.04, 0.1*pi/180, 0.006, 0.006]) ^ 2;
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 

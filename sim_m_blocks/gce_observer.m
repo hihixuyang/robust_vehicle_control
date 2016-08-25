@@ -22,7 +22,7 @@ function x_hat = gce_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
     %    Instituition: University of São Paulo
     
     vx = y(3);
-    y = [y(1:2); y(4)];
+    y = [y(1:2)];
 
     % Build reduced state vector
     x_hat_prev = [x_hat_prev(2:3); x_hat_prev(5:6)];
