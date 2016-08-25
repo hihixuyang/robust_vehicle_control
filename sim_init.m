@@ -63,7 +63,7 @@ vehicle_parameters.steering.angle_limit = 24 * pi / 180;
 vehicle_parameters.powertrain.delay = 0.15;
 vehicle_parameters.powertrain.wheel_radius = 0.33;
 vehicle_parameters.powertrain.gear_shift_delay = 0.4;
-vehicle_parameters.powertrain.gear_ratio = [-3.168 0 3.538 2.06 1.404 1 0.713 0.582];
+vehicle_parameters.powertrain.gear_ratio = [-3.168 0 3.538 2.06 1.404 1 0.713 0.582]';
 vehicle_parameters.powertrain.diff_ratio = 4.1;
 vehicle_parameters.powertrain.efficiency = 0.90;
 vehicle_parameters.powertrain.throttle_tc = 0.5;
@@ -113,7 +113,7 @@ controller_parameters.Ts = 2e-2; % 50Hz
 controller_parameters.tau = 1;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([vx / 6, 10 * pi / 180])^-2); 
+controller_parameters.W = @(vx)(diag([max(vx,5) / 6, 10 * pi / 180])^-2); 
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -128,7 +128,7 @@ observer_parameters.subsampling = 2;
 
 % Observer parameters
 observer_parameters.rho = 1e-4;
-observer_parameters.C = eye(3,4);
+observer_parameters.C = eye(2,4);
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -143,20 +143,20 @@ simulation_parameters.x0 = [0; 0; 0; 10; 0; 0];
 % GPS parameters
 simulation_parameters.gps = struct();
 simulation_parameters.gps.C = [zeros(4,1) eye(4,5)];
-simulation_parameters.gps.Cov = diag([0.04, 0.5*pi/180, 0.006, 0.006]) ^ 2;
+simulation_parameters.gps.Cov = diag([0.04, 0.1*pi/180, 0.006, 0.006]) ^ 2;
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Generate controller
-display('Generating robust controller');
+display('Generating controllers');
 
-controller = generate_lateral_controller(vehicle_parameters, controller_parameters);
+controller = generate_controllers(vehicle_parameters, controller_parameters);
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Plot resulting controller frequency response
 if is_plotting_results
-    display('Plotting robust controller transfer functions');
+    display('Plotting controller transfer functions');
     
     plot_lateral_controller(vehicle_parameters, controller_parameters, controller);
     

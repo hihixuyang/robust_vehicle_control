@@ -1,5 +1,5 @@
-function x_hat = gce_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
-    % gcc_control Guaranteed cost control callback
+function x_hat = lateral_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
+    % lateral_observer Guaranteed cost observer callback
     %    Inputs: y          - Measurement vector (ey, epsi, vx)
     %            x_hat_prev - Previous state estimate (s, ey, epsi, vx, vy, r)
     %            u_prev     - Previous control input
@@ -22,7 +22,7 @@ function x_hat = gce_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
     %    Instituition: University of São Paulo
     
     vx = y(3);
-    y = [y(1:2); y(4)];
+    y = [y(1:2)];
 
     % Build reduced state vector
     x_hat_prev = [x_hat_prev(2:3); x_hat_prev(5:6)];

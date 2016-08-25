@@ -1,5 +1,5 @@
-function controller = generate_lateral_controller(vehicle_parameters, controller_parameters)
-    % generate_lateral_controller Generates the GCC controller gains
+function controller = generate_controllers(vehicle_parameters, controller_parameters)
+    % generate_controllers Generates the lateral GCC gains and longitudinal DLQR gains
     %    Inputs: vehicle_parameters - Vehicle parameter structure
     %                vehicle_parameters.m  - Vehicle mass [Kg]
     %                vehicle_parameters.l  - Wheelbase [m]
@@ -21,15 +21,27 @@ function controller = generate_lateral_controller(vehicle_parameters, controller
     %                controller_parameters.W - Output cost matrix
     %
     %    Outputs: controller - Controller gain structure
-    %                 controller.vx     - Reference velocity vector [m/s]
-    %                 controller.vx_min - Minimum reference velocity [m/s]
-    %                 controller.vx_max - Maximum reference velocity [m/s]
-    %                 controller.K      - Controller gains w.r.t vx [-]
-    %                 controller.P      - Closed loop cost matrix w.r.t vx [-]
-    %                 controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
+    %                 controller.lateral     - Lateral controller gain structure
+    %                     lateral.vx             - Reference velocity vector [m/s]
+    %                     lateral.vx_min         - Minimum reference velocity [m/s]
+    %                     lateral.vx_max         - Maximum reference velocity [m/s]
+    %                     lateral.K              - Controller gains w.r.t vx [-]
+    %                     lateral.P              - Closed loop cost matrix w.r.t vx [-]
+    %                     lateral.Rbar           - Feasibility offset cost matrix w.r.t vx [-]
+    %                 controller.longitudinal - Longitudinal controller gain structure
+    %                     longitudinal.K              - Controller gains w.r.t vx [-]
+    %                     longitudinal.P              - Closed loop cost matrix w.r.t vx [-]
+    %                     longitudinal.Rbar           - Feasibility offset cost matrix w.r.t vx [-]
+    %                     longitudinal.ax_to_throttle - Ratio between acceleration and throttle pedal [-]
+    %                     longitudinal.ax_to_brake    - Ratio between acceleration and brake pedal [-]
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
+    
+    %
+    % Lateral Controller
+    %
+    display(['    Generating lateral controller'])
     
     % Cost basis definition
     tau = controller_parameters.tau;
@@ -58,7 +70,7 @@ function controller = generate_lateral_controller(vehicle_parameters, controller
     % Resulting controller will be gain scheduled in speed
     for i = 1:size(vx_list, 1)
         vx = vx_list(i);
-        display(['    Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
+        display(['        Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
 
         % Get continous time matrices in affine form
         [A, Bu, Br, Hc, Ea, Ebu, ~] = ...
@@ -109,13 +121,58 @@ function controller = generate_lateral_controller(vehicle_parameters, controller
 
     % Create controller structure
     controller = struct();
+    controller.lateral = struct();
+    
 
-    % Velocity information for gain scheduling
-    controller.vx = vx_list;
-    controller.vx_min = vx_min;
-    controller.vx_max = vx_max;
+    % Velocity information for gain scheduling lateral controller
+    controller.lateral.vx = vx_list;
+    controller.lateral.vx_min = vx_min;
+    controller.lateral.vx_max = vx_max;
 
-    controller.K = K_list;        % Controller gain matrix
-    controller.P = P_list;        % Closed loop state cost matrix
-    controller.Rbar = Rbar_list;  % Feasbility offset cost matrix
+    % Lateral controller gains
+    controller.lateral.K = K_list;        % Controller gain matrix
+    controller.lateral.P = P_list;        % Closed loop state cost matrix
+    controller.lateral.Rbar = Rbar_list;  % Feasbility offset cost matrix
+    
+    %
+    % Longitudinal controller Controller
+    %
+    display(['    Generating longitudinal controller'])
+    
+    % Define system dynamics
+    % State x = [ev_int; ev]
+    % Input u = ax
+    % Input r = ax_ref
+    % Dynamics: dx = A x + B u + Br r
+    A = [0 1;
+         0 0];
+    B = [0; -1];
+    Br = [0; 1];
+    
+    % Discretize dynamics
+    out = expm([A B Br; zeros(2,4)]);
+    F = out(1:2, 1:2);
+    G = out(1:2, 3);
+    Gr = out(1:2, 4);
+    
+    % Calculate discrete LQR
+    Q = eye(2);
+    R = 1;
+    [K, P] = dlqr(F, G, Q, R);
+    
+    % Calculate feedforward
+    N = G \ Gr;
+    K = [K, N];
+    
+    % Get throttle and brake constants
+    [ax_to_throttle, ax_to_brake] = longitudinal_model(vehicle_parameters);
+    
+    % Create controller structure
+    controller.longitudinal = struct();
+    controller.longitudinal.K = K;
+    controller.longitudinal.P = P;
+    controller.longitudinal.Rbar = R + G' * P * G;
+    controller.longitudinal.ax_to_throttle = ax_to_throttle;
+    controller.longitudinal.ax_to_brake = ax_to_brake;
+    
 end

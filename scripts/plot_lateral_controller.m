@@ -21,12 +21,13 @@ function plot_lateral_controller(vehicle_parameters, controller_parameters, cont
     %                controller_parameters.D - Input-to-output matrix
     %                controller_parameters.W - Output cost matrix
     %            controller - Controller gain structure
-    %                controller.vx     - Reference velocity vector [m/s]
-    %                controller.vx_min - Minimum reference velocity [m/s]
-    %                controller.vx_max - Maximum reference velocity [m/s]
-    %                controller.K      - Controller gains w.r.t vx [-]
-    %                controller.P      - Closed loop cost matrix w.r.t vx [-]
-    %                controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
+    %                controller.lateral - Lateral controller gain structure
+    %                    lateral.vx     - Reference velocity vector [m/s]
+    %                    lateral.vx_min - Minimum reference velocity [m/s]
+    %                    lateral.vx_max - Maximum reference velocity [m/s]
+    %                    lateral.K      - Controller gains w.r.t vx [-]
+    %                    lateral.P      - Closed loop cost matrix w.r.t vx [-]
+    %                    lateral.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
@@ -58,9 +59,9 @@ function plot_lateral_controller(vehicle_parameters, controller_parameters, cont
         nCr = ureal('nCf', 0, 'range', [-1, 1]);
         delta = diag([nCf, nCr]);
         
-        [~, Kidx] = max(controller.vx == vx);
-        K = permute(controller.K(Kidx, :, 1:size(A,2)), [2, 3, 1]);
-        N = permute(controller.K(Kidx, :, size(A,2)+1:end), [2, 3, 1]);
+        [~, Kidx] = max(controller.lateral.vx == vx);
+        K = permute(controller.lateral.K(Kidx, :, 1:size(A,2)), [2, 3, 1]);
+        N = permute(controller.lateral.K(Kidx, :, size(A,2)+1:end), [2, 3, 1]);
         
         % Open loop plant
         Fu = F + H * delta * Ef;
