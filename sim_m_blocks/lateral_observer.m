@@ -1,5 +1,5 @@
-function x_hat = gce_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
-    % gcc_control Guaranteed cost control callback
+function x_hat = lateral_observer(y, x_hat_prev, u_prev, kappa, observer, has_data)
+    % lateral_observer Guaranteed cost observer callback
     %    Inputs: y          - Measurement vector (ey, epsi, vx)
     %            x_hat_prev - Previous state estimate (s, ey, epsi, vx, vy, r)
     %            u_prev     - Previous control input

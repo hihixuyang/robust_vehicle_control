@@ -113,7 +113,7 @@ controller_parameters.Ts = 2e-2; % 50Hz
 controller_parameters.tau = 1;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([vx / 6, 10 * pi / 180])^-2); 
+controller_parameters.W = @(vx)(diag([max(vx,5) / 6, 10 * pi / 180])^-2); 
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -148,15 +148,15 @@ simulation_parameters.gps.Cov = diag([0.04, 0.1*pi/180, 0.006, 0.006]) ^ 2;
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Generate controller
-display('Generating robust controller');
+display('Generating controllers');
 
-controller = generate_lateral_controller(vehicle_parameters, controller_parameters);
+controller = generate_controllers(vehicle_parameters, controller_parameters);
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Plot resulting controller frequency response
 if is_plotting_results
-    display('Plotting robust controller transfer functions');
+    display('Plotting controller transfer functions');
     
     plot_lateral_controller(vehicle_parameters, controller_parameters, controller);
     

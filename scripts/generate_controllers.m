@@ -1,5 +1,5 @@
-function controller = generate_lateral_controller(vehicle_parameters, controller_parameters)
-    % generate_lateral_controller Generates the GCC controller gains
+function controller = generate_controllers(vehicle_parameters, controller_parameters)
+    % generate_controllers Generates the lateral GCC gains and longitudinal DLQR gains
     %    Inputs: vehicle_parameters - Vehicle parameter structure
     %                vehicle_parameters.m  - Vehicle mass [Kg]
     %                vehicle_parameters.l  - Wheelbase [m]
@@ -162,4 +162,5 @@ function controller = generate_lateral_controller(vehicle_parameters, controller
     controller.longitudinal.K = K;
     controller.longitudinal.P = P;
     controller.longitudinal.Rbar = R + G' * P * G;
+    
 end

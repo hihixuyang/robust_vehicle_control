@@ -1,5 +1,5 @@
-function u = gcc_control(x, kappa, controller)
-    % gcc_control Guaranteed cost control callback
+function u = lateral_control(x, kappa, controller)
+    % lateral_control Guaranteed cost control callback
     %    Inputs: x     - State vector (s, ey, epsi, vx, vy, r)
     %            kappa - Path curvature
     %            controller - Controller gain structure

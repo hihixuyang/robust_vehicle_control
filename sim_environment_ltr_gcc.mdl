@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.463"
+    ComputedModelVersion    "1.469"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -47,7 +47,7 @@ Model {
     }
     TestPointedSignal {
       SignalName	      "observer_control_input"
-      FullBlockPath	      "sim_environment_ltr_gcc/Lateral Controller//Observer/Lateral Controllers"
+      FullBlockPath	      "sim_environment_ltr_gcc/Lateral Controller//Observer/Lateral Controller"
       LogSignal		      1
       MaxPoints		      5000
       Decimation	      2
@@ -112,10 +112,10 @@ Model {
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
 	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"101"
+	LoadSaveID		"145"
 	Extents			[1833.0, 1004.0]
-	ZoomFactor		[1.54]
-	Offset			[0.0, 0.0]
+	ZoomFactor		[1.4799999999999998]
+	Offset			[0.0, 1.1368683772161603e-13]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Aug 25 01:11:42 2016"
-  RTWModifiedTimeStamp	  393988301
-  ModelVersionFormat	  "1.%<AutoIncrement:463>"
+  LastModifiedDate	  "Thu Aug 25 13:56:49 2016"
+  RTWModifiedTimeStamp	  394034207
+  ModelVersionFormat	  "1.%<AutoIncrement:469>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1065,7 +1065,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "145"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "140"
+    SIDHighWatermark	    "153"
     Block {
       BlockType		      SubSystem
       Name		      "Brake System"
@@ -1705,6 +1705,19 @@ Model {
     }
     Block {
       BlockType		      Delay
+      Name		      "Command Delay2"
+      SID		      "141"
+      Ports		      [1, 1]
+      Position		      [0, 138, 35, 172]
+      ZOrder		      64
+      ShowName		      off
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+      SampleTime	      "controller_parameters.Ts"
+    }
+    Block {
+      BlockType		      Delay
       Name		      "Command Delay3"
       SID		      "91"
       Ports		      [1, 1]
@@ -1730,6 +1743,19 @@ Model {
       SampleTime	      "controller_parameters.Ts"
     }
     Block {
+      BlockType		      Delay
+      Name		      "Command Delay5"
+      SID		      "142"
+      Ports		      [1, 1]
+      Position		      [0, 168, 35, 202]
+      ZOrder		      67
+      ShowName		      off
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+      SampleTime	      "controller_parameters.Ts"
+    }
+    Block {
       BlockType		      Constant
       Name		      "Constant"
       SID		      "32"
@@ -1747,11 +1773,11 @@ Model {
     Block {
       BlockType		      Constant
       Name		      "Constant1"
-      SID		      "61"
-      Position		      [65, 77, 225, 103]
-      ZOrder		      29
+      SID		      "143"
+      Position		      [-115, 140, -85, 170]
+      ZOrder		      65
       ShowName		      off
-      Value		      "0.1"
+      Value		      "10"
     }
     Block {
       BlockType		      Constant
@@ -1765,9 +1791,9 @@ Model {
     Block {
       BlockType		      Constant
       Name		      "Constant3"
-      SID		      "95"
-      Position		      [65, 167, 225, 193]
-      ZOrder		      54
+      SID		      "144"
+      Position		      [-115, 170, -85, 200]
+      ZOrder		      66
       ShowName		      off
       Value		      "0"
     }
@@ -1899,14 +1925,14 @@ Model {
       Name		      "Lateral Controller/Observer"
       SID		      "101"
       Ports		      [3, 1]
-      Position		      [70, -41, 220, 61]
+      Position		      [85, -41, 235, 61]
       ZOrder		      -35
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"Lateral Controller/Observer"
 	Location		[53, 23, 1920, 1200]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1974,7 +2000,7 @@ Model {
 	}
 	Block {
 	  BlockType		  SubSystem
-	  Name			  "Lateral Controllers"
+	  Name			  "Lateral Controller"
 	  SID			  "51"
 	  Ports			  [2, 1]
 	  Position		  [570, 45, 740, 120]
@@ -1995,7 +2021,7 @@ Model {
 	    DataLoggingNameMode	    "SignalName"
 	  }
 	  System {
-	    Name		    "Lateral Controllers"
+	    Name		    "Lateral Controller"
 	    Location		    [223, 338, 826, 833]
 	    Open		    off
 	    ModelBrowserVisibility  off
@@ -2332,7 +2358,7 @@ Model {
 	  Name			  "observer_control_input"
 	  ZOrder		  353
 	  Labels		  [1, 1]
-	  SrcBlock		  "Lateral Controllers"
+	  SrcBlock		  "Lateral Controller"
 	  SrcPort		  1
 	  DstBlock		  "u_s"
 	  DstPort		  1
@@ -2360,7 +2386,7 @@ Model {
 	  }
 	  Branch {
 	    ZOrder		    336
-	    DstBlock		    "Lateral Controllers"
+	    DstBlock		    "Lateral Controller"
 	    DstPort		    1
 	  }
 	}
@@ -2377,7 +2403,7 @@ Model {
 	  Branch {
 	    ZOrder		    341
 	    Points		    [0, 191; 438, 0; 0, -196]
-	    DstBlock		    "Lateral Controllers"
+	    DstBlock		    "Lateral Controller"
 	    DstPort		    2
 	  }
 	}
@@ -2410,6 +2436,366 @@ Model {
 	  Points		  [-117, 0; 0, -55]
 	  DstBlock		  "Lateral Observer"
 	  DstPort		  5
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Longitudinal Controller"
+      SID		      "145"
+      Ports		      [3, 2]
+      Position		      [85, 110, 235, 200]
+      ZOrder		      63
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"Longitudinal Controller"
+	Location		[53, 23, 1920, 1200]
+	Open			on
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"148"
+	Block {
+	  BlockType		  Inport
+	  Name			  "x_v6"
+	  SID			  "146"
+	  Position		  [20, 123, 50, 137]
+	  ZOrder		  65
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "vx_ref_s"
+	  SID			  "147"
+	  Position		  [20, 153, 50, 167]
+	  ZOrder		  58
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "ax_ref_s"
+	  SID			  "148"
+	  Position		  [20, 183, 50, 197]
+	  ZOrder		  59
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Delay
+	  Name			  "Command Delay5"
+	  SID			  "149"
+	  Ports			  [1, 1]
+	  Position		  [75, 203, 110, 237]
+	  ZOrder		  64
+	  ShowName		  off
+	  InputPortMap		  "u0"
+	  DelayLength		  "1"
+	  InitialCondition	  "0"
+	  SampleTime		  "controller_parameters.Ts"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "Integrator"
+	  SID			  "150"
+	  Ports			  [1, 1]
+	  Position		  [225, 255, 255, 285]
+	  ZOrder		  56
+	  BlockMirror		  on
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Longitudinal Controller"
+	  SID			  "151"
+	  Ports			  [4, 3]
+	  Position		  [130, 114, 350, 236]
+	  ZOrder		  55
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  SFBlockType		  "MATLAB Function"
+	  Variant		  off
+	  System {
+	    Name		    "Longitudinal Controller"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "31"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "y_v4"
+	      SID		      "151::19"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      10
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "vx_ref_s"
+	      SID		      "151::20"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      11
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "ax_ref_s"
+	      SID		      "151::29"
+	      Position		      [20, 171, 40, 189]
+	      ZOrder		      18
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "vx_int_s"
+	      SID		      "151::30"
+	      Position		      [20, 206, 40, 224]
+	      ZOrder		      19
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "151::17"
+	      Ports		      [1, 1]
+	      Position		      [270, 245, 320, 285]
+	      ZOrder		      8
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "151::16"
+	      Tag		      "Stateflow S-Function sim_environment_ltr_gcc 6"
+	      Ports		      [4, 4]
+	      Position		      [180, 122, 230, 223]
+	      ZOrder		      7
+	      FunctionName	      "sf_sfun"
+	      Parameters	      "controller"
+	      PortCounts	      "[4 4]"
+	      SFunctionDeploymentMode off
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"throttle_s"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"brake_s"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"dvx_int_s"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "151::18"
+	      Position		      [460, 256, 480, 274]
+	      ZOrder		      9
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "throttle_s"
+	      SID		      "151::25"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      16
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "brake_s"
+	      SID		      "151::28"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      17
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "dvx_int_s"
+	      SID		      "151::31"
+	      Position		      [460, 171, 480, 189]
+	      ZOrder		      20
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      1
+	      SrcBlock		      "y_v4"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      2
+	      SrcBlock		      "vx_ref_s"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      3
+	      SrcBlock		      "ax_ref_s"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      4
+	      SrcBlock		      "vx_int_s"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "throttle_s"
+	      ZOrder		      5
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "throttle_s"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "brake_s"
+	      ZOrder		      6
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "brake_s"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "dvx_int_s"
+	      ZOrder		      7
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      4
+	      DstBlock		      "dvx_int_s"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      8
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      9
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "throttle_s"
+	  SID			  "152"
+	  Position		  [455, 128, 485, 142]
+	  ZOrder		  61
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "brake_s"
+	  SID			  "153"
+	  Position		  [455, 168, 485, 182]
+	  ZOrder		  62
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "x_v6"
+	  SrcPort		  1
+	  DstBlock		  "Longitudinal Controller"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "Integrator"
+	  SrcPort		  1
+	  Points		  [-167, 0; 0, -50]
+	  DstBlock		  "Command Delay5"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "Longitudinal Controller"
+	  SrcPort		  3
+	  Points		  [9, 0; 0, 55]
+	  DstBlock		  "Integrator"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  "vx_ref_s"
+	  SrcPort		  1
+	  DstBlock		  "Longitudinal Controller"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  5
+	  SrcBlock		  "ax_ref_s"
+	  SrcPort		  1
+	  DstBlock		  "Longitudinal Controller"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  6
+	  SrcBlock		  "Longitudinal Controller"
+	  SrcPort		  2
+	  DstBlock		  "brake_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "Longitudinal Controller"
+	  SrcPort		  1
+	  DstBlock		  "throttle_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Command Delay5"
+	  SrcPort		  1
+	  DstBlock		  "Longitudinal Controller"
+	  DstPort		  4
 	}
       }
     }
@@ -2991,13 +3377,6 @@ Model {
       DstPort		      3
     }
     Line {
-      ZOrder		      481
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      DstBlock		      "Powertrain System"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      225
       SrcBlock		      "Fcn"
       SrcPort		      1
@@ -3030,13 +3409,6 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      512
-      SrcBlock		      "Constant3"
-      SrcPort		      1
-      DstBlock		      "Brake System"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      381
       SrcBlock		      "Command Delay4"
       SrcPort		      1
@@ -3061,14 +3433,67 @@ Model {
       ZOrder		      429
       SrcBlock		      "Command Delay1"
       SrcPort		      1
-      DstBlock		      "Lateral Controller/Observer"
-      DstPort		      1
+      Points		      [15, 0]
+      Branch {
+	ZOrder			534
+	Points			[0, 150]
+	DstBlock		"Longitudinal Controller"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			533
+	DstBlock		"Lateral Controller/Observer"
+	DstPort			1
+      }
     }
     Line {
       ZOrder		      437
       SrcBlock		      "GPS Sensor"
       SrcPort		      1
       DstBlock		      "Command Delay1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      529
+      SrcBlock		      "Longitudinal Controller"
+      SrcPort		      2
+      DstBlock		      "Brake System"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      530
+      SrcBlock		      "Longitudinal Controller"
+      SrcPort		      1
+      Points		      [9, 0; 0, -45]
+      DstBlock		      "Powertrain System"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      531
+      SrcBlock		      "Command Delay2"
+      SrcPort		      1
+      DstBlock		      "Longitudinal Controller"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      532
+      SrcBlock		      "Command Delay5"
+      SrcPort		      1
+      DstBlock		      "Longitudinal Controller"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      535
+      SrcBlock		      "Constant1"
+      SrcPort		      1
+      DstBlock		      "Command Delay2"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      536
+      SrcBlock		      "Constant3"
+      SrcPort		      1
+      DstBlock		      "Command Delay5"
       DstPort		      1
     }
     Annotation {
@@ -3112,12 +3537,12 @@ Stateflow {
     name		    "sim_environment_ltr_gcc"
     created		    "05-Aug-2016 10:42:47"
     isLibrary		    0
-    firstTarget		    56
+    firstTarget		    69
     sfVersion		    80000006
   }
   chart {
     id			    2
-    name		    "Lateral Controller//Observer/Lateral Controllers"
+    name		    "Lateral Controller//Observer/Lateral Controller"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
@@ -3125,10 +3550,7 @@ Stateflow {
     firstTransition	    9
     firstJunction	    8
     viewObj		    2
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    13
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3136,7 +3558,7 @@ Stateflow {
     chartFileNumber	    1
     disableImplicitCasting  1
     eml {
-      name		      "gcc_control_wrapper"
+      name		      "lateral_control_wrapper"
     }
   }
   state {
@@ -3153,8 +3575,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function u_s = gcc_control_wrapper(x_v6, kappa_s, controller)\n\n    u_s = gcc_control(x_v6, kapp"
-      "a_s, controller.lateral);\n    \nend"
+      script		      "function u_s = lateral_control_wrapper(x_v6, kappa_s, controller)\n\n    u_s = lateral_control(x_"
+      "v6, kappa_s, controller.lateral);\n    \nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -3279,7 +3701,7 @@ Stateflow {
   }
   instance {
     id			    10
-    name		    "Lateral Controller//Observer/Lateral Controllers"
+    name		    "Lateral Controller//Observer/Lateral Controller"
     machine		    1
     chart		    2
   }
@@ -3551,7 +3973,7 @@ Stateflow {
     chartFileNumber	    3
     disableImplicitCasting  1
     eml {
-      name		      "gce_observer_wrapper"
+      name		      "lateral_observer_wrapper"
     }
   }
   state {
@@ -3568,10 +3990,10 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [x_hat_v6, count_out_s] = gce_observer_wrapper(y_v4, u_prev_s, kappa_s, observer, x_hat_"
-      "prev_v6, count_in_s)\n\n    x_hat_v6 = zeros(6,1);\n    count_out_s = 0;\n    \n    x_hat_v6 = gce_observer(y_v4"
-      ", x_hat_prev_v6, u_prev_s, kappa_s, observer, count_in_s == 0);\n    \n    count_out_s = mod(count_in_s + 1, obs"
-      "erver.subsampling);\nend"
+      script		      "function [x_hat_v6, count_out_s] = lateral_observer_wrapper(y_v4, u_prev_s, kappa_s, observer, x_"
+      "hat_prev_v6, count_in_s)\n\n    x_hat_v6 = zeros(6,1);\n    count_out_s = 0;\n    \n    x_hat_v6 = lateral_obser"
+      "ver(y_v4, x_hat_prev_v6, u_prev_s, kappa_s, observer, count_in_s == 0);\n    \n    count_out_s = mod(count_in_s "
+      "+ 1, observer.subsampling);\nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -4141,8 +4563,267 @@ Stateflow {
     machine		    1
     chart		    45
   }
-  target {
+  chart {
     id			    56
+    name		    "Longitudinal Controller/Longitudinal Controller"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 57 0 0]
+    firstTransition	    67
+    firstJunction	    66
+    viewObj		    56
+    visible		    1
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    17
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    58
+    chartFileNumber	    6
+    disableImplicitCasting  1
+    eml {
+      name		      "longitudinal_control_wrapper"
+    }
+  }
+  state {
+    id			    57
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    56
+    treeNode		    [56 0 0 0]
+    superState		    SUBCHART
+    subviewer		    56
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [throttle_s, brake_s, dvx_int_s] = longitudinal_control_wrapper(y_v4, vx_ref_s, ...\n   "
+      "                                                                      ax_ref_s, vx_int_s, ...\n                 "
+      "                                                        controller)\n\n    [throttle_s, brake_s, dvx_int_s] = lo"
+      "ngitudinal_control(y_v4(3), vx_ref_s, ax_ref_s, ...\n                                                           "
+      " vx_int_s, controller.longitudinal);\n    \nend"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    58
+    ssIdNumber		    6
+    name		    "y_v4"
+    linkNode		    [56 0 59]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    59
+    ssIdNumber		    4
+    name		    "throttle_s"
+    linkNode		    [56 58 60]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    60
+    ssIdNumber		    7
+    name		    "vx_ref_s"
+    linkNode		    [56 59 61]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    61
+    ssIdNumber		    15
+    name		    "ax_ref_s"
+    linkNode		    [56 60 62]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    62
+    ssIdNumber		    16
+    name		    "vx_int_s"
+    linkNode		    [56 61 63]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    63
+    ssIdNumber		    8
+    name		    "controller"
+    linkNode		    [56 62 64]
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    64
+    ssIdNumber		    14
+    name		    "brake_s"
+    linkNode		    [56 63 65]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    65
+    ssIdNumber		    17
+    name		    "dvx_int_s"
+    linkNode		    [56 64 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    66
+    position		    [23.5747 49.5747 7]
+    chart		    56
+    linkNode		    [56 0 0]
+    subviewer		    56
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    67
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      66
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    56
+    linkNode		    [56 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    56
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    68
+    name		    "Longitudinal Controller/Longitudinal Controller"
+    machine		    1
+    chart		    56
+  }
+  target {
+    id			    69
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
