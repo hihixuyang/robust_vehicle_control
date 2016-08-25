@@ -1,4 +1,4 @@
-function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, vx_int, controller)
+function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, vx_int, gear, controller)
     % longitudinal_control Discrete LQR control callback
     %    Inputs: vx     - Current velocity [m/s]
     %            vx_ref - Velocity reference [m/s]
@@ -8,6 +8,8 @@ function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, v
     %                controller.K      - Controller gains w.r.t vx [-]
     %                controller.P      - Closed loop cost matrix w.r.t vx [-]
     %                controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
+    %                controller.ax_to_throttle - Ratio between acceleration and throttle pedal [-]
+    %                controller.ax_to_brake    - Ratio between acceleration and brake pedal [-]
     %    
     %    Outputs: throttle - Throttle command[rad]
     %             brake    - Brake command [rad]
@@ -23,6 +25,6 @@ function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, v
     u = - controller.K * x_ctrl;
     
     % Convert to throttle and brake values
-    throttle = u*(u > 0)/5;
-    brake = u*(u < 0)/10;
+    throttle = controller.ax_to_throttle(gear+2) * u * (u >= 0);
+    brake = controller.ax_to_brake * u * (u < 0);
 end

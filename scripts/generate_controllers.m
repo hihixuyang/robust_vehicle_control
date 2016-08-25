@@ -21,12 +21,19 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     %                controller_parameters.W - Output cost matrix
     %
     %    Outputs: controller - Controller gain structure
-    %                 controller.vx     - Reference velocity vector [m/s]
-    %                 controller.vx_min - Minimum reference velocity [m/s]
-    %                 controller.vx_max - Maximum reference velocity [m/s]
-    %                 controller.K      - Controller gains w.r.t vx [-]
-    %                 controller.P      - Closed loop cost matrix w.r.t vx [-]
-    %                 controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
+    %                 controller.lateral     - Lateral controller gain structure
+    %                     lateral.vx             - Reference velocity vector [m/s]
+    %                     lateral.vx_min         - Minimum reference velocity [m/s]
+    %                     lateral.vx_max         - Maximum reference velocity [m/s]
+    %                     lateral.K              - Controller gains w.r.t vx [-]
+    %                     lateral.P              - Closed loop cost matrix w.r.t vx [-]
+    %                     lateral.Rbar           - Feasibility offset cost matrix w.r.t vx [-]
+    %                 controller.longitudinal - Longitudinal controller gain structure
+    %                     longitudinal.K              - Controller gains w.r.t vx [-]
+    %                     longitudinal.P              - Closed loop cost matrix w.r.t vx [-]
+    %                     longitudinal.Rbar           - Feasibility offset cost matrix w.r.t vx [-]
+    %                     longitudinal.ax_to_throttle - Ratio between acceleration and throttle pedal [-]
+    %                     longitudinal.ax_to_brake    - Ratio between acceleration and brake pedal [-]
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
@@ -157,10 +164,15 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     N = G \ Gr;
     K = [K, N];
     
+    % Get throttle and brake constants
+    [ax_to_throttle, ax_to_brake] = longitudinal_model(vehicle_parameters);
+    
     % Create controller structure
     controller.longitudinal = struct();
     controller.longitudinal.K = K;
     controller.longitudinal.P = P;
     controller.longitudinal.Rbar = R + G' * P * G;
+    controller.longitudinal.ax_to_throttle = ax_to_throttle;
+    controller.longitudinal.ax_to_brake = ax_to_brake;
     
 end
