@@ -137,8 +137,13 @@ display('Setting simulation parameters');
 
 simulation_parameters = struct();
 
+% Load trajectory
+simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 5);
+% simulation_parameters.trajectory = load_trajectory('kappa_2.csv', 5);
+
 % Simulation initial state
-simulation_parameters.x0 = [0; 0; 0; 10; 0; 0];
+simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0; 
+                            simulation_parameters.trajectory.vx(1); 0; 0];
 
 % GPS parameters
 simulation_parameters.gps = struct();
