@@ -53,6 +53,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Crosstrack error - e_y [m]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Heading error plot
     subplot(3,3,2)
@@ -67,6 +68,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Heading error - e_\psi [\circ]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Long. velocity plot
     subplot(3,3,3)
@@ -81,6 +83,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Long. velocity - v_x [m/s]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Lat. velocity plot
     subplot(3,3,4)
@@ -95,6 +98,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Lat. velocity - v_y [m/s]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Yaw rate plot
     mu = min(chassis_mu, [], 2);
@@ -112,6 +116,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Yaw rate - r [\circ/s]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Steering angle plot
     subplot(3,3,6)
@@ -126,6 +131,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Steering angle - \delta_f [-]', 'FontSize', scale*8)
+    xlim([0, max(t)])
 
     % Slip Envelopes
     a = vehicle_parameters.body.a;

@@ -18,14 +18,14 @@ function [trajectory] = load_trajectory(filename, ay_max)
     trajectory = struct();
     
     % Load curvature profile
-    trajectory.s = X(:,1);
-    trajectory.kappa = X(:,2);
+    trajectory.s = X(1:10:end,1);
+    trajectory.kappa = X(1:10:end,2);
     
     % Calculate maximum constant velocity profile
-    vx_max = min(sqrt(ay_max ./ X(:,2)));
+    vx_max = min(sqrt(ay_max ./ abs(X(1:10:end,2))));
     
     % Set constant velocity trajectory
-    trajectory.vx = vx_max * ones(size(X(:,2)));
-    trajectory.ax = zeros(size(X(:,2)));
+    trajectory.vx = vx_max * ones(size(X(1:10:end,2)));
+    trajectory.ax = zeros(size(X(1:10:end,2)));
 end
 
