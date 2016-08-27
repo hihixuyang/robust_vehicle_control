@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.438"
+    ComputedModelVersion    "1.455"
     NumModelReferences	    0
     NumTestPointedSignals   5
     TestPointedSignal {
@@ -75,7 +75,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [53.0, 23.0, 1867.0, 1177.0]
+      Location		      [53.0, 23.0, 2507.0, 1417.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -100,16 +100,16 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1833.0, 1004.0]
-	  ZoomFactor		  [1.4411267535351393]
-	  Offset		  [-223.2068083448753, -145.83854743767313]
+	  Extents		  [2473.0, 1244.0]
+	  ZoomFactor		  [1.7859751643535424]
+	  Offset		  [-388.54808301052935, -145.76912065439677]
 	}
 	Object {
 	  $ObjectID		  7
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "18"
-	  Extents		  [1833.0, 1004.0]
+	  Extents		  [2473.0, 1244.0]
 	  ZoomFactor		  [2.25]
 	  Offset		  [0.0, 0.0]
 	}
@@ -118,7 +118,7 @@ Model {
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "42"
-	  Extents		  [1833.0, 1004.0]
+	  Extents		  [2473.0, 1244.0]
 	  ZoomFactor		  [2.375268585057932]
 	  Offset		  [85.379367209141265, -28.844520429362888]
 	}
@@ -132,9 +132,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Aug 25 16:26:56 2016"
-  RTWModifiedTimeStamp	  394043198
-  ModelVersionFormat	  "1.%<AutoIncrement:438>"
+  LastModifiedDate	  "Sat Aug 27 12:24:42 2016"
+  RTWModifiedTimeStamp	  394201481
+  ModelVersionFormat	  "1.%<AutoIncrement:455>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -229,7 +229,7 @@ Model {
 	  $ObjectID		  11
 	  Version		  "1.15.1"
 	  StartTime		  "0.0"
-	  StopTime		  "100"
+	  StopTime		  "simulation_parameters.t_end"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -782,8 +782,8 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "Data Import//Export"
-      ConfigPrmDlgPosition     [ 740, 356, 1820, 1040 ] 
+      CurrentDlgPage	      "Hardware Implementation"
+      ConfigPrmDlgPosition     [ 740, 334, 1820, 1040 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -854,11 +854,6 @@ Model {
   }
   BlockParameterDefaults {
     Block {
-      BlockType		      Clock
-      DisplayTime	      off
-      Decimation	      "10"
-    }
-    Block {
       BlockType		      Constant
       Value		      "1"
       VectorParams1D	      on
@@ -894,11 +889,6 @@ Model {
       Outputs		      "4"
       DisplayOption	      "none"
       BusSelectionMode	      off
-    }
-    Block {
-      BlockType		      Fcn
-      Expr		      "sin(u[1])"
-      SampleTime	      "-1"
     }
     Block {
       BlockType		      Gain
@@ -998,6 +988,9 @@ Model {
       RndMeth		      "Floor"
     }
     Block {
+      BlockType		      Stop
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -1058,7 +1051,7 @@ Model {
   }
   System {
     Name		    "sim_environment_gcc"
-    Location		    [53, 23, 1920, 1200]
+    Location		    [53, 23, 2560, 1440]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1070,9 +1063,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "144"
+    ZoomFactor		    "179"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "130"
+    SIDHighWatermark	    "134"
     Block {
       BlockType		      SubSystem
       Name		      "Brake System"
@@ -1090,7 +1083,7 @@ Model {
       }
       System {
 	Name			"Brake System"
-	Location		[53, 23, 1920, 1200]
+	Location		[53, 23, 2560, 1440]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1309,7 +1302,7 @@ Model {
       Variant		      off
       System {
 	Name			"Chassis"
-	Location		[53, 23, 1920, 1200]
+	Location		[53, 23, 2560, 1440]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1348,6 +1341,7 @@ Model {
 	  Port {
 	    PortNumber		    1
 	    Name		    "chassis_curvature"
+	    PropagatedSignals	    "kappa_s"
 	    RTWStorageClass	    "Auto"
 	    DataLogging		    on
 	    DataLoggingNameMode	    "SignalName"
@@ -1691,13 +1685,6 @@ Model {
       }
     }
     Block {
-      BlockType		      Clock
-      Name		      "Clock"
-      SID		      "86"
-      Position		      [-210, 285, -190, 305]
-      ZOrder		      49
-    }
-    Block {
       BlockType		      Delay
       Name		      "Command Delay1"
       SID		      "89"
@@ -1779,39 +1766,12 @@ Model {
     }
     Block {
       BlockType		      Constant
-      Name		      "Constant1"
-      SID		      "115"
-      Position		      [-90, 140, -60, 170]
-      ZOrder		      58
-      ShowName		      off
-      Value		      "10"
-    }
-    Block {
-      BlockType		      Constant
       Name		      "Constant2"
       SID		      "53"
-      Position		      [-90, 300, -60, 330]
+      Position		      [25, 300, 55, 330]
       ZOrder		      25
       ShowName		      off
       Value		      "[1 1]"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant3"
-      SID		      "116"
-      Position		      [-90, 170, -60, 200]
-      ZOrder		      59
-      ShowName		      off
-      Value		      "0"
-    }
-    Block {
-      BlockType		      Fcn
-      Name		      "Fcn"
-      SID		      "85"
-      Position		      [-120, 270, -60, 300]
-      ZOrder		      48
-      ShowName		      off
-      Expr		      "sin(2*pi*0.1*u(7)) * 5 / u(4)^2"
     }
     Block {
       BlockType		      SubSystem
@@ -2272,7 +2232,6 @@ Model {
 	  ZOrder		  312
 	  SrcBlock		  "x_v6"
 	  SrcPort		  1
-	  Points		  [60, 0]
 	  DstBlock		  "Longitudinal Controller"
 	  DstPort		  1
 	}
@@ -2296,7 +2255,6 @@ Model {
 	  ZOrder		  304
 	  SrcBlock		  "vx_ref_s"
 	  SrcPort		  1
-	  Points		  [60, 0]
 	  DstBlock		  "Longitudinal Controller"
 	  DstPort		  2
 	}
@@ -2304,7 +2262,6 @@ Model {
 	  ZOrder		  305
 	  SrcBlock		  "ax_ref_s"
 	  SrcPort		  1
-	  Points		  [60, 0]
 	  DstBlock		  "Longitudinal Controller"
 	  DstPort		  3
 	}
@@ -2350,17 +2307,6 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
-      BlockType		      Mux
-      Name		      "Mux2"
-      SID		      "87"
-      Ports		      [2, 1]
-      Position		      [-150, 266, -145, 304]
-      ZOrder		      50
-      ShowName		      off
-      Inputs		      "2"
-      DisplayOption	      "bar"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Powertrain System"
       SID		      "42"
@@ -2377,7 +2323,7 @@ Model {
       }
       System {
 	Name			"Powertrain System"
-	Location		[53, 23, 1920, 1200]
+	Location		[53, 23, 2560, 1440]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2751,7 +2697,7 @@ Model {
       }
       System {
 	Name			"Steering System"
-	Location		[53, 23, 1920, 1200]
+	Location		[53, 23, 2560, 1440]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2854,6 +2800,202 @@ Model {
 	DataLoggingNameMode	"SignalName"
       }
     }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Trajecotry Reference"
+      SID		      "131"
+      Ports		      [1, 4]
+      Position		      [-315, 141, -95, 259]
+      ZOrder		      62
+      LibraryVersion	      "1.32"
+      ErrorFcn		      "Stateflow.Translate.translate"
+      PermitHierarchicalResolution "ExplicitOnly"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      SFBlockType	      "MATLAB Function"
+      Variant		      off
+      System {
+	Name			"Trajecotry Reference"
+	Location		[223, 338, 826, 833]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"30"
+	Block {
+	  BlockType		  Inport
+	  Name			  "x_v6"
+	  SID			  "131::19"
+	  Position		  [20, 101, 40, 119]
+	  ZOrder		  10
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  SID			  "131::17"
+	  Ports			  [1, 1]
+	  Position		  [270, 280, 320, 320]
+	  ZOrder		  8
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  " SFunction "
+	  SID			  "131::16"
+	  Tag			  "Stateflow S-Function sim_environment_gcc 5"
+	  Ports			  [1, 5]
+	  Position		  [180, 125, 230, 245]
+	  ZOrder		  7
+	  FunctionName		  "sf_sfun"
+	  Parameters		  "simulation_parameters"
+	  PortCounts		  "[1 5]"
+	  SFunctionDeploymentMode off
+	  EnableBusSupport	  on
+	  Port {
+	    PortNumber		    2
+	    Name		    "vx_ref_s"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    3
+	    Name		    "ax_ref_s"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    4
+	    Name		    "kappa_s"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "stop_s"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  SID			  "131::18"
+	  Position		  [460, 291, 480, 309]
+	  ZOrder		  9
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "vx_ref_s"
+	  SID			  "131::25"
+	  Position		  [460, 101, 480, 119]
+	  ZOrder		  16
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "ax_ref_s"
+	  SID			  "131::28"
+	  Position		  [460, 136, 480, 154]
+	  ZOrder		  17
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "kappa_s"
+	  SID			  "131::29"
+	  Position		  [460, 171, 480, 189]
+	  ZOrder		  18
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "stop_s"
+	  SID			  "131::30"
+	  Position		  [460, 206, 480, 224]
+	  ZOrder		  19
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  27
+	  SrcBlock		  "x_v6"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "vx_ref_s"
+	  ZOrder		  28
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "vx_ref_s"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "ax_ref_s"
+	  ZOrder		  29
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  3
+	  DstBlock		  "ax_ref_s"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "kappa_s"
+	  ZOrder		  30
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  4
+	  DstBlock		  "kappa_s"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "stop_s"
+	  ZOrder		  31
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  5
+	  DstBlock		  "stop_s"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  32
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  33
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  DstBlock		  " Demux "
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      Stop
+      Name		      "stop_at_end_of_track"
+      SID		      "132"
+      Position		      [-81, 300, -49, 330]
+      ZOrder		      63
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+    }
     Line {
       ZOrder		      45
       SrcBlock		      "Chassis"
@@ -2863,15 +3005,15 @@ Model {
 	ZOrder			270
 	Points			[-421, 0]
 	Branch {
-	  ZOrder		  248
-	  Points		  [0, 39]
-	  DstBlock		  "Command Delay1"
+	  ZOrder		  340
+	  Points		  [-294, 0]
+	  DstBlock		  "Trajecotry Reference"
 	  DstPort		  1
 	}
 	Branch {
-	  ZOrder		  246
-	  Points		  [-129, 0]
-	  DstBlock		  "Mux2"
+	  ZOrder		  248
+	  Points		  [0, 39]
+	  DstBlock		  "Command Delay1"
 	  DstPort		  1
 	}
       }
@@ -2982,48 +3124,35 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      225
-      SrcBlock		      "Fcn"
-      SrcPort		      1
-      Points		      [17, 0]
+      ZOrder		      333
+      SrcBlock		      "Trajecotry Reference"
+      SrcPort		      3
+      Points		      [52, 0]
       Branch {
-	ZOrder			292
-	Labels			[-1, 1]
-	DstBlock		"Chassis"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			237
-	Points			[0, -245]
+	ZOrder			339
+	Points			[0, -175]
 	DstBlock		"Command Delay3"
 	DstPort			1
       }
+      Branch {
+	ZOrder			338
+	Labels			[-1, 1]
+	Points			[0, 70]
+	DstBlock		"Chassis"
+	DstPort			2
+      }
     }
     Line {
-      ZOrder		      227
-      SrcBlock		      "Mux2"
-      SrcPort		      1
-      DstBlock		      "Fcn"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      228
-      SrcBlock		      "Clock"
-      SrcPort		      1
-      DstBlock		      "Mux2"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      295
-      SrcBlock		      "Constant1"
+      ZOrder		      335
+      SrcBlock		      "Trajecotry Reference"
       SrcPort		      1
       DstBlock		      "Command Delay2"
       DstPort		      1
     }
     Line {
-      ZOrder		      299
-      SrcBlock		      "Constant3"
-      SrcPort		      1
+      ZOrder		      334
+      SrcBlock		      "Trajecotry Reference"
+      SrcPort		      2
       DstBlock		      "Command Delay4"
       DstPort		      1
     }
@@ -3073,6 +3202,14 @@ Model {
       DstBlock		      "Longitudinal Controller"
       DstPort		      4
     }
+    Line {
+      ZOrder		      341
+      SrcBlock		      "Trajecotry Reference"
+      SrcPort		      4
+      Points		      [25, 0]
+      DstBlock		      "stop_at_end_of_track"
+      DstPort		      1
+    }
     Annotation {
       SID		      "35"
       Name		      "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -3114,7 +3251,7 @@ Stateflow {
     name		    "sim_environment_gcc"
     created		    "05-Aug-2016 10:42:47"
     isLibrary		    0
-    firstTarget		    49
+    firstTarget		    60
     sfVersion		    80000006
   }
   chart {
@@ -3752,10 +3889,7 @@ Stateflow {
     firstTransition	    47
     firstJunction	    46
     viewObj		    35
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    18
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -4024,8 +4158,218 @@ Stateflow {
     machine		    1
     chart		    35
   }
-  target {
+  chart {
     id			    49
+    name		    "Trajecotry Reference"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 50 0 0]
+    firstTransition	    58
+    firstJunction	    57
+    viewObj		    49
+    machine		    1
+    ssIdHighWaterMark	    16
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    51
+    chartFileNumber	    5
+    disableImplicitCasting  1
+    eml {
+      name		      "trajectory_reference_wrapper"
+    }
+  }
+  state {
+    id			    50
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    49
+    treeNode		    [49 0 0 0]
+    superState		    SUBCHART
+    subviewer		    49
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [vx_ref_s, ax_ref_s, kappa_s, stop_s] = ...\n         trajectory_reference_wrapper(x_v6,"
+      " simulation_parameters)\n\n    [kappa_s, vx_ref_s, ax_ref_s] = trajectory_reference(x_v6(1), simulation_paramete"
+      "rs.trajectory);\n    stop_s = (x_v6(1) >= max(simulation_parameters.trajectory.s));\n    \nend"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    51
+    ssIdNumber		    6
+    name		    "x_v6"
+    linkNode		    [49 0 52]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    52
+    ssIdNumber		    4
+    name		    "vx_ref_s"
+    linkNode		    [49 51 53]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    53
+    ssIdNumber		    7
+    name		    "simulation_parameters"
+    linkNode		    [49 52 54]
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    54
+    ssIdNumber		    14
+    name		    "ax_ref_s"
+    linkNode		    [49 53 55]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    55
+    ssIdNumber		    15
+    name		    "kappa_s"
+    linkNode		    [49 54 56]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    56
+    ssIdNumber		    16
+    name		    "stop_s"
+    linkNode		    [49 55 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    57
+    position		    [23.5747 49.5747 7]
+    chart		    49
+    linkNode		    [49 0 0]
+    subviewer		    49
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    58
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      57
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    49
+    linkNode		    [49 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    49
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    59
+    name		    "Trajecotry Reference"
+    machine		    1
+    chart		    49
+  }
+  target {
+    id			    60
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
