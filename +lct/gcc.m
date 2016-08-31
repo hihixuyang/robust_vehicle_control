@@ -55,10 +55,9 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
     opt = sdpsettings('solver', '+sedumi', 'verbose', 0);
     sol = optimize(constraints, trace(S), opt);
 
-%     if sol.problem ~= 0
-%         baseException = MException('gcc:solver_failed','SeDuMi did not converge');
-%         throw(baseException);
-%     end
+    if sol.problem ~= 0
+        warning('gcc:solver_failed','SeDuMi did not converge');
+    end
 
     K = value(KPinv) / value(Pinv);
     P = inv(value(Pinv));
