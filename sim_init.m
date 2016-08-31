@@ -127,7 +127,7 @@ observer_parameters.Ts = controller_parameters.Ts;
 observer_parameters.subsampling = 2;
 
 % Observer parameters
-observer_parameters.rho = 1e-4;
+observer_parameters.rho = 1e-3;
 observer_parameters.C = eye(2,4);
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
