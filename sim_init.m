@@ -124,7 +124,7 @@ observer_parameters = struct();
 
 % Observer sampling time
 observer_parameters.Ts = controller_parameters.Ts;
-observer_parameters.subsampling = 2;
+observer_parameters.subsampling = 5;
 
 % Observer parameters
 observer_parameters.rho = 1e-3;
@@ -187,6 +187,14 @@ if is_plotting_results
     
     display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
+
+%% Save controller and observer to JSON files
+display('Generating controller and observer parameters JSON files');
+
+savejson('', controller, 'vehicle_code/params/controller.json')
+savejson('', observer, 'vehicle_code/params/observer.json')
+
+display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Finish initialization
 display(['Initialization Completed in ' num2str(toc) ' seconds']);
