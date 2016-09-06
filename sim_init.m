@@ -189,10 +189,9 @@ if is_plotting_results
 end
 
 %% Save controller and observer to JSON files
-display('Generating controller and observer parameters JSON files');
+display('Generating controller and observer gains MAT file');
 
-savejson('', controller, 'vehicle_code/params/controller.json');
-savejson('', observer, 'vehicle_code/params/observer.json');
+save('vehicle_code/controller_gains.mat', 'controller', 'observer')
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 

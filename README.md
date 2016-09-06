@@ -8,7 +8,9 @@ It contains:
 
 ## Pre-requisites
 
-The source code in this repository requires:
+### Controller synthesis and simulation (MATLAB)
+
+The Matlab source code in this repository requires:
 
 - [MATLAB R2015b](http://www.mathworks.com/products/matlab/)
 
@@ -16,7 +18,17 @@ and
 
 - [YALMIP Toolbox](http://users.isy.liu.se/johanl/yalmip/)
 - [SeDuMi](http://sedumi.ie.lehigh.edu)
-- [JSONlab](https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab--a-toolbox-to-encode-decode-json-files)
+
+### Controller implementation (Python)
+
+The python souce code in this repository requires:
+
+- [Python 2.7](https://www.python.org/download/releases/2.7/)
+
+and 
+
+- [NumPy]()
+- [SciPy]()
 
 ### Installing pre-requisites
 
@@ -30,15 +42,14 @@ and
  
 *Note: Many thanks to Michal Kvasnica, Johan Löfberg and Jos Sturm for creating these wonderful tools*
 
-#### JSONlab toolbox
+#### NumPy and SciPy
 
-1. Open [JSONlab's page](https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab--a-toolbox-to-encode-decode-json-files) at FileExchange
-2. Click the download toolbox button (*this requires a MathWorks account*)
-3. Run the downloaded executable
-4. Restart Matlab if it was open
+ 1. Open terminal
+ 2. Execute `sudo apt-get install -y python-pip`
+ 3. Execute `pip install numpy`
+ 4. Execute `pip install scipy`
 
-*Note: This toolbox is only used to export the controller and observer gains into JSON files which can be easily used in ROS*
-*Note: Many thanks to Qianqian Fang for creating this extremely useful toolbox*
+*Note: You should have pyton 2.7 intalled in your (Linux) system already*
 
 ## Running the examples
 
