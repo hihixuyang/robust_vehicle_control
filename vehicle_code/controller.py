@@ -85,7 +85,7 @@ class Controller:
         #            vx - Current longitudinal velocity [m/s]
 
         F, G, Gr, L = self.observer.query(vx)
-        self.x = F * self.x + G * u * Gr * r
+        self.x = F * self.x + G * u + Gr * r
 
     def measure(self, y, vx):
         # measure Execute the observer based on GPS data
