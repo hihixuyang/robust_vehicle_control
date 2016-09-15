@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.477"
+    ComputedModelVersion    "1.478"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -115,7 +115,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1833.0, 1004.0]
 	ZoomFactor		[1.272204662841536]
-	Offset			[-421.004518698061, -227.59059903047091]
+	Offset			[-421.004518698061, -227.5905990304708]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Aug 27 12:30:16 2016"
-  RTWModifiedTimeStamp	  394201815
-  ModelVersionFormat	  "1.%<AutoIncrement:477>"
+  LastModifiedDate	  "Mon Sep 05 19:13:10 2016"
+  RTWModifiedTimeStamp	  395003566
+  ModelVersionFormat	  "1.%<AutoIncrement:478>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -222,7 +222,7 @@ Model {
 	  $ObjectID		  9
 	  Version		  "1.15.1"
 	  StartTime		  "0.0"
-	  StopTime		  "100"
+	  StopTime		  "simulation_parameters.t_end"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -1334,6 +1334,7 @@ Model {
 	  Port {
 	    PortNumber		    1
 	    Name		    "chassis_curvature"
+	    PropagatedSignals	    "kappa_s"
 	    RTWStorageClass	    "Auto"
 	    DataLogging		    on
 	    DataLoggingNameMode	    "SignalName"
@@ -4609,8 +4610,6 @@ Stateflow {
     firstJunction	    53
     viewObj		    45
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    16
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

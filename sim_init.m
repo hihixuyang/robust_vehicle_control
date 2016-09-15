@@ -107,7 +107,7 @@ display('Setting controller parameters')
 controller_parameters = struct();
 
 % Controller sampling time
-controller_parameters.Ts = 2e-2; % 50Hz
+controller_parameters.Ts = 1e-1; % 10Hz
 
 % Controller weights
 controller_parameters.tau = 1;
@@ -124,7 +124,7 @@ observer_parameters = struct();
 
 % Observer sampling time
 observer_parameters.Ts = controller_parameters.Ts;
-observer_parameters.subsampling = 2;
+observer_parameters.subsampling = 1;
 
 % Observer parameters
 observer_parameters.rho = 1e-3;
@@ -151,7 +151,7 @@ simulation_parameters.t_end = sum(diff(simulation_parameters.trajectory.s) ./ ..
 % GPS parameters
 simulation_parameters.gps = struct();
 simulation_parameters.gps.C = [zeros(4,1) eye(4,5)];
-simulation_parameters.gps.Cov = diag([0.04, 0.1*pi/180, 0.006, 0.006]) ^ 2;
+simulation_parameters.gps.Cov = diag([0.04, 0.5*pi/180, 0.006, 0.006]) ^ 2;
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -187,6 +187,13 @@ if is_plotting_results
     
     display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
+
+%% Save controller and observer to JSON files
+display('Generating controller and observer gains MAT file');
+
+save('vehicle_code/controller_gains.mat', 'controller', 'observer')
+
+display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Finish initialization
 display(['Initialization Completed in ' num2str(toc) ' seconds']);
