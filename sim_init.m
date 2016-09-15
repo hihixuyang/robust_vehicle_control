@@ -55,7 +55,7 @@ vehicle_parameters.uncertainty.load_transfer_Ts = 0.01;
 
 % Steering system params
 vehicle_parameters.steering.delay = 0.05;
-vehicle_parameters.steering.tc = 1/3;
+vehicle_parameters.steering.tc = 1/2;
 vehicle_parameters.steering.rate_limit = 19.04 * pi / 180;
 vehicle_parameters.steering.angle_limit = 24 * pi / 180;
 
@@ -110,7 +110,7 @@ controller_parameters = struct();
 controller_parameters.Ts = 1e-1; % 10Hz
 
 % Controller weights
-controller_parameters.tau = 1;
+controller_parameters.tau = 2;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
 controller_parameters.W = @(vx)(diag([max(vx,5) / 8, 10 * pi / 180])^-2); 
@@ -138,7 +138,7 @@ display('Setting simulation parameters');
 simulation_parameters = struct();
 
 % Load trajectory
-simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 5);
+simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 2.5);
 % simulation_parameters.trajectory = load_trajectory('kappa_2.csv', 5);
 
 % Simulation initial state
