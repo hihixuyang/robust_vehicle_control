@@ -113,10 +113,10 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
         K = [K, N];
 
         % Save related quantities for future gain scheduling
-        X = inv(inv(P) - e * (H * H'));
+        X = inv(inv(P) - (H * e * H'));
         K_list(i, :, :) = K;
         P_list(i, :, :) = P;
-        Rbar_list(i, :, :) = R + e^-1 * (Ebu' * Ebu) + G' * X * G;
+        Rbar_list(i, :, :) = R + Ebu' * inv(e) * Ebu + G' * X * G;
     end
 
     % Create controller structure
