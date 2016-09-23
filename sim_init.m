@@ -107,7 +107,7 @@ display('Setting controller parameters')
 controller_parameters = struct();
 
 % Controller sampling time
-controller_parameters.Ts = 5e-2; % 20Hz
+controller_parameters.Ts = 2.5e-2; % 40Hz
 
 % Controller weights
 controller_parameters.tau = 2;
@@ -124,7 +124,7 @@ observer_parameters = struct();
 
 % Observer sampling time
 observer_parameters.Ts = controller_parameters.Ts;
-observer_parameters.subsampling = 2; % 10 Hz
+observer_parameters.subsampling = 4; % 10 Hz
 
 % Observer parameters
 observer_parameters.rho = 1e-3;
