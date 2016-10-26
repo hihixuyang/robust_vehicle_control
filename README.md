@@ -27,8 +27,8 @@ The python souce code in this repository requires:
 
 and 
 
-- [NumPy]()
-- [SciPy]()
+- [NumPy](http://www.numpy.org)
+- [SciPy](http://www.scipy.org)
 
 ### Installing pre-requisites
 
