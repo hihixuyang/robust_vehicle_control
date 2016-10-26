@@ -113,7 +113,7 @@ controller_parameters.Ts = 2.5e-2; % 40Hz
 controller_parameters.tau = 2;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([max(vx, 5) / 5, 10 * pi / 180])^-2); 
+controller_parameters.W = @(vx)(diag([max(vx, 5) / 8, 10 * pi / 180])^-2); 
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -138,8 +138,9 @@ display('Setting simulation parameters');
 simulation_parameters = struct();
 
 % Load trajectory
-simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 2.5);
+% simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 2.5);
 % simulation_parameters.trajectory = load_trajectory('kappa_2.csv', 5);
+simulation_parameters.trajectory = load_trajectory('kappa_3.csv', 2.5);
 
 % Simulation initial state
 simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0; 
