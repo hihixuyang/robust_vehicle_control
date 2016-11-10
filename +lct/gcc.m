@@ -29,16 +29,16 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
     Pinv = sdpvar(Nx, Nx);
     KPinv = sdpvar(Nu, Nx, 'full');
     S = sdpvar(Nx, Nx);
-    X = sdpvar(Nw, Nw);
+    e = sdpvar(1, 1);
 
     M = blkvar;
     M(1,1) = - inv(Qv);
     M(1,5) = Qp * Pinv;
     M(2,2) = - inv(R);
     M(2,5) = KPinv;
-    M(3,3) = - X;
+    M(3,3) = - e * eye(Nw);
     M(3,5) = Ef * Pinv - Eg * KPinv;
-    M(4,4) = - Pinv + H * X * H';
+    M(4,4) = - Pinv + e * (H * H');
     M(4,5) = F * Pinv - G * KPinv;
     M(5,5) = - Pinv;
 
@@ -50,7 +50,7 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
     constraints = [Pinv >= 0;
                    M <= 0;
                    N >= 0;
-                   X >= 0];
+                   e >= 0];
 
     opt = sdpsettings('solver', '+sedumi', 'verbose', 0);
     sol = optimize(constraints, trace(S), opt);
@@ -61,6 +61,6 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
 
     K = value(KPinv) / value(Pinv);
     P = inv(value(Pinv));
-    e = value(X);
+    e = value(e);
 
 end
