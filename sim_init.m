@@ -113,7 +113,7 @@ controller_parameters.Ts = 2.5e-2; % 40Hz
 controller_parameters.tau = 2;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([max(vx, 5) / 8, 10 * pi / 180])^-2); 
+controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2); 
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
