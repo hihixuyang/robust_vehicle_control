@@ -81,7 +81,7 @@ vehicle_parameters.powertrain.engine_torque_map = [0; 88.7680; 127.540; 179.630;
 vehicle_parameters.brake.delay = 0.15;
 vehicle_parameters.brake.front_ratio = 0.7;
 vehicle_parameters.brake.rear_ratio = 0.3;
-vehicle_parameters.brake.actuator_tc = 1;
+vehicle_parameters.brake.actuator_tc = 0.1;
 vehicle_parameters.brake.rate_limit = 1.4;
 vehicle_parameters.brake.mc_pressure_to_torque = 620;
 vehicle_parameters.brake.pedal_to_mc_pressure = 15;
@@ -110,7 +110,7 @@ controller_parameters = struct();
 controller_parameters.Ts = 2.5e-2; % 40Hz
 
 % Controller weights
-controller_parameters.tau = 2;
+controller_parameters.tau = 1;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
 controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2); 
@@ -138,9 +138,8 @@ display('Setting simulation parameters');
 simulation_parameters = struct();
 
 % Load trajectory
-% simulation_parameters.trajectory = load_trajectory('kappa_1.csv', 2.5);
-% simulation_parameters.trajectory = load_trajectory('kappa_2.csv', 5);
-simulation_parameters.trajectory = load_trajectory('kappa_3.csv', 2.5);
+% simulation_parameters.trajectory = load_trajectory('bandejao.csv');
+simulation_parameters.trajectory = load_trajectory('bloco_didatico.csv');
 
 % Simulation initial state
 simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0; 
@@ -189,7 +188,7 @@ if is_plotting_results
     display(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
-%% Save controller and observer to JSON files
+%% Save controller and observer to MAT file
 display('Generating controller and observer gains MAT file');
 
 save('vehicle_code/controller_gains.mat', 'controller', 'observer')

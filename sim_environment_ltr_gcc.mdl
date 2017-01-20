@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.478"
+    ComputedModelVersion    "1.481"
     NumModelReferences	    0
     NumTestPointedSignals   7
     TestPointedSignal {
@@ -115,7 +115,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1833.0, 1004.0]
 	ZoomFactor		[1.272204662841536]
-	Offset			[-421.004518698061, -227.5905990304708]
+	Offset			[-421.004518698061, -217.59059903047091]
       }
     }
   }
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Sep 05 19:13:10 2016"
-  RTWModifiedTimeStamp	  395003566
-  ModelVersionFormat	  "1.%<AutoIncrement:478>"
+  LastModifiedDate	  "Fri Jan 20 04:14:13 2017"
+  RTWModifiedTimeStamp	  406786452
+  ModelVersionFormat	  "1.%<AutoIncrement:481>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1146,7 +1146,7 @@ Model {
 	  SID			  "134"
 	  Position		  [670, 94, 730, 126]
 	  ZOrder		  35
-	  Denominator		  "[2 * pi / vehicle_parameters.brake.hydraulic_ts, 1]"
+	  Denominator		  "[vehicle_parameters.brake.hydraulic_ts / 2 / pi, 1]"
 	}
 	Block {
 	  BlockType		  Gain
@@ -3311,7 +3311,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Trajecotry Reference"
+      Name		      "Trajectory Reference"
       SID		      "176"
       Ports		      [1, 4]
       Position		      [-395, 141, -175, 259]
@@ -3324,7 +3324,7 @@ Model {
       SFBlockType	      "MATLAB Function"
       Variant		      off
       System {
-	Name			"Trajecotry Reference"
+	Name			"Trajectory Reference"
 	Location		[223, 338, 826, 833]
 	Open			off
 	ModelBrowserVisibility	off
@@ -3528,7 +3528,7 @@ Model {
 	Branch {
 	  ZOrder		  600
 	  Points		  [-122, 0]
-	  DstBlock		  "Trajecotry Reference"
+	  DstBlock		  "Trajectory Reference"
 	  DstPort		  1
 	}
       }
@@ -3697,21 +3697,21 @@ Model {
     }
     Line {
       ZOrder		      596
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      1
       DstBlock		      "Command Delay2"
       DstPort		      1
     }
     Line {
       ZOrder		      595
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      2
       DstBlock		      "Command Delay5"
       DstPort		      1
     }
     Line {
       ZOrder		      594
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      4
       Points		      [25, 0]
       DstBlock		      "stop_at_end_of_track"
@@ -3719,7 +3719,7 @@ Model {
     }
     Line {
       ZOrder		      598
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      3
       Points		      [57, 0]
       Branch {
@@ -4601,7 +4601,7 @@ Stateflow {
   }
   chart {
     id			    45
-    name		    "Trajecotry Reference"
+    name		    "Trajectory Reference"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
@@ -4609,7 +4609,10 @@ Stateflow {
     firstTransition	    54
     firstJunction	    53
     viewObj		    45
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    16
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -4635,8 +4638,9 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function [vx_ref_s, ax_ref_s, kappa_s, stop_s] = ...\n         trajectory_reference_wrapper(x_v6,"
-      " simulation_parameters)\n\n    [kappa_s, vx_ref_s, ax_ref_s] = trajectory_reference(x_v6(1), simulation_paramete"
-      "rs.trajectory);\n    stop_s = (x_v6(1) >= max(simulation_parameters.trajectory.s));\n    \nend"
+      " simulation_parameters)\n\n    s = min(x_v6(1), simulation_parameters.trajectory.s(end));\n    [kappa_s, vx_ref_"
+      "s, ax_ref_s] = trajectory_reference(s, simulation_parameters.trajectory);\n    stop_s = (x_v6(1) >= max(simulati"
+      "on_parameters.trajectory.s));\n    \nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -4805,7 +4809,7 @@ Stateflow {
   }
   instance {
     id			    55
-    name		    "Trajecotry Reference"
+    name		    "Trajectory Reference"
     machine		    1
     chart		    45
   }

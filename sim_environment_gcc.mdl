@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.455"
+    ComputedModelVersion    "1.472"
     NumModelReferences	    0
     NumTestPointedSignals   5
     TestPointedSignal {
@@ -75,7 +75,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [53.0, 23.0, 2507.0, 1417.0]
+      Location		      [50.0, 23.0, 1870.0, 1177.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -94,33 +94,42 @@ Model {
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		3
+	Dimension		4
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [2473.0, 1244.0]
-	  ZoomFactor		  [1.7859751643535424]
-	  Offset		  [-388.54808301052935, -145.76912065439677]
+	  Extents		  [1836.0, 1004.0]
+	  ZoomFactor		  [1.320672023374726]
+	  Offset		  [-340.60066371681421, -177.60951327433628]
 	}
 	Object {
 	  $ObjectID		  7
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "18"
-	  Extents		  [2473.0, 1244.0]
-	  ZoomFactor		  [2.25]
+	  LoadSaveID		  "42"
+	  Extents		  [1836.0, 1004.0]
+	  ZoomFactor		  [2.38]
 	  Offset		  [0.0, 0.0]
 	}
 	Object {
 	  $ObjectID		  8
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "42"
-	  Extents		  [2473.0, 1244.0]
-	  ZoomFactor		  [2.375268585057932]
-	  Offset		  [85.379367209141265, -28.844520429362888]
+	  LoadSaveID		  "97"
+	  Extents		  [1836.0, 1004.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-3.3125, 0.0]
+	}
+	Object {
+	  $ObjectID		  9
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "18"
+	  Extents		  [1836.0, 1004.0]
+	  ZoomFactor		  [2.25]
+	  Offset		  [0.0, 0.0]
 	}
 	PropName		"EditorsInfo"
       }
@@ -132,9 +141,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Aug 27 12:24:42 2016"
-  RTWModifiedTimeStamp	  394201481
-  ModelVersionFormat	  "1.%<AutoIncrement:455>"
+  LastModifiedDate	  "Fri Jan 20 04:13:34 2017"
+  RTWModifiedTimeStamp	  406786414
+  ModelVersionFormat	  "1.%<AutoIncrement:472>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -176,7 +185,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    9
+    $ObjectID		    10
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "sim_environment"
     overrideMode_	    [0.0]
@@ -220,13 +229,13 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      10
+      $ObjectID		      11
       Version		      "1.15.1"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  11
+	  $ObjectID		  12
 	  Version		  "1.15.1"
 	  StartTime		  "0.0"
 	  StopTime		  "simulation_parameters.t_end"
@@ -263,7 +272,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  12
+	  $ObjectID		  13
 	  Version		  "1.15.1"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -299,7 +308,7 @@ Model {
 	  LoggingIntervals	  "[-inf, inf]"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  13
+	  $ObjectID		  14
 	  Version		  "1.15.1"
 	  Array {
 	    Type		    "Cell"
@@ -356,7 +365,7 @@ Model {
 	  AccelVerboseBuild	  off
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  14
+	  $ObjectID		  15
 	  Version		  "1.15.1"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -446,7 +455,7 @@ Model {
 	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  15
+	  $ObjectID		  16
 	  Version		  "1.15.1"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -486,7 +495,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  16
+	  $ObjectID		  17
 	  Version		  "1.15.1"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  EnableRefExpFcnMdlSchedulingChecks on
@@ -502,7 +511,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  17
+	  $ObjectID		  18
 	  Version		  "1.15.1"
 	  SFSimEcho		  on
 	  SimCtrlC		  on
@@ -514,7 +523,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  18
+	  $ObjectID		  19
 	  Version		  "1.15.1"
 	  Array {
 	    Type		    "Cell"
@@ -583,7 +592,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      19
+	      $ObjectID		      20
 	      Version		      "1.15.1"
 	      Array {
 		Type			"Cell"
@@ -655,7 +664,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      20
+	      $ObjectID		      21
 	      Version		      "1.15.1"
 	      Array {
 		Type			"Cell"
@@ -740,7 +749,7 @@ Model {
 	  }
 	}
 	SlCovCC.ConfigComp {
-	  $ObjectID		  21
+	  $ObjectID		  22
 	  Version		  "1.15.1"
 	  Description		  "Simulink Coverage Configuration Component"
 	  Name			  "Simulink Coverage"
@@ -767,7 +776,7 @@ Model {
 	  CovStopTime		  0
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  22
+	  $ObjectID		  23
 	  Version		  "1.15.1"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -789,11 +798,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    10
+    $ObjectID		    11
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    23
+    $ObjectID		    24
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1051,7 +1060,7 @@ Model {
   }
   System {
     Name		    "sim_environment_gcc"
-    Location		    [53, 23, 2560, 1440]
+    Location		    [50, 23, 1920, 1200]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1063,7 +1072,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "179"
+    ZoomFactor		    "132"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "134"
     Block {
@@ -1083,7 +1092,7 @@ Model {
       }
       System {
 	Name			"Brake System"
-	Location		[53, 23, 2560, 1440]
+	Location		[50, 23, 1920, 1200]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1153,7 +1162,7 @@ Model {
 	  SID			  "110"
 	  Position		  [670, 94, 730, 126]
 	  ZOrder		  35
-	  Denominator		  "[2 * pi / vehicle_parameters.brake.hydraulic_ts, 1]"
+	  Denominator		  "[vehicle_parameters.brake.hydraulic_ts / 2 / pi, 1]"
 	}
 	Block {
 	  BlockType		  Gain
@@ -1302,7 +1311,7 @@ Model {
       Variant		      off
       System {
 	Name			"Chassis"
-	Location		[53, 23, 2560, 1440]
+	Location		[50, 23, 1920, 1200]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2323,7 +2332,7 @@ Model {
       }
       System {
 	Name			"Powertrain System"
-	Location		[53, 23, 2560, 1440]
+	Location		[50, 23, 1920, 1200]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2802,7 +2811,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Trajecotry Reference"
+      Name		      "Trajectory Reference"
       SID		      "131"
       Ports		      [1, 4]
       Position		      [-315, 141, -95, 259]
@@ -2815,7 +2824,7 @@ Model {
       SFBlockType	      "MATLAB Function"
       Variant		      off
       System {
-	Name			"Trajecotry Reference"
+	Name			"Trajectory Reference"
 	Location		[223, 338, 826, 833]
 	Open			off
 	ModelBrowserVisibility	off
@@ -3007,7 +3016,7 @@ Model {
 	Branch {
 	  ZOrder		  340
 	  Points		  [-294, 0]
-	  DstBlock		  "Trajecotry Reference"
+	  DstBlock		  "Trajectory Reference"
 	  DstPort		  1
 	}
 	Branch {
@@ -3125,7 +3134,7 @@ Model {
     }
     Line {
       ZOrder		      333
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      3
       Points		      [52, 0]
       Branch {
@@ -3144,14 +3153,14 @@ Model {
     }
     Line {
       ZOrder		      335
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      1
       DstBlock		      "Command Delay2"
       DstPort		      1
     }
     Line {
       ZOrder		      334
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      2
       DstBlock		      "Command Delay4"
       DstPort		      1
@@ -3204,7 +3213,7 @@ Model {
     }
     Line {
       ZOrder		      341
-      SrcBlock		      "Trajecotry Reference"
+      SrcBlock		      "Trajectory Reference"
       SrcPort		      4
       Points		      [25, 0]
       DstBlock		      "stop_at_end_of_track"
@@ -3252,6 +3261,8 @@ Stateflow {
     created		    "05-Aug-2016 10:42:47"
     isLibrary		    0
     firstTarget		    60
+    debug {
+    }
     sfVersion		    80000006
   }
   chart {
@@ -3429,7 +3440,10 @@ Stateflow {
     firstTransition	    22
     firstJunction	    21
     viewObj		    11
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    11
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3679,7 +3693,10 @@ Stateflow {
     firstTransition	    33
     firstJunction	    32
     viewObj		    24
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    15
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3706,7 +3723,7 @@ Stateflow {
       isEML		      1
       script		      "function [fxf_s, gear_next_s] = powertrain_model_wrapper(throttle_s, x_v6, gear_s, vehicle_parame"
       "ters)\n\n    [fxf_s, gear_next_s] = powertrain_model(throttle_s, x_v6, gear_s, vehicle_parameters.powertrain);\n"
-      "    \nend"
+      "\nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -4160,7 +4177,7 @@ Stateflow {
   }
   chart {
     id			    49
-    name		    "Trajecotry Reference"
+    name		    "Trajectory Reference"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
@@ -4168,7 +4185,10 @@ Stateflow {
     firstTransition	    58
     firstJunction	    57
     viewObj		    49
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    16
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -4194,8 +4214,9 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function [vx_ref_s, ax_ref_s, kappa_s, stop_s] = ...\n         trajectory_reference_wrapper(x_v6,"
-      " simulation_parameters)\n\n    [kappa_s, vx_ref_s, ax_ref_s] = trajectory_reference(x_v6(1), simulation_paramete"
-      "rs.trajectory);\n    stop_s = (x_v6(1) >= max(simulation_parameters.trajectory.s));\n    \nend"
+      " simulation_parameters)\n\n    s = min(x_v6(1), simulation_parameters.trajectory.s(end));\n    [kappa_s, vx_ref_"
+      "s, ax_ref_s] = trajectory_reference(s, simulation_parameters.trajectory);\n    stop_s = (x_v6(1) >= max(simulati"
+      "on_parameters.trajectory.s));\n    \nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -4364,7 +4385,7 @@ Stateflow {
   }
   instance {
     id			    59
-    name		    "Trajecotry Reference"
+    name		    "Trajectory Reference"
     machine		    1
     chart		    49
   }
