@@ -138,8 +138,10 @@ display('Setting simulation parameters');
 simulation_parameters = struct();
 
 % Load trajectory
-simulation_parameters.trajectory = load_trajectory('bandejao.csv');
+% simulation_parameters.trajectory = load_trajectory('bandejao.csv');
+% simulation_parameters.trajectory = load_trajectory('bandejao_hg.csv');
 % simulation_parameters.trajectory = load_trajectory('bloco_didatico.csv');
+simulation_parameters.trajectory = load_trajectory('bloco_didatico_hg.csv');
 
 % Simulation initial state
 simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0; 
