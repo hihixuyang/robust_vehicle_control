@@ -26,5 +26,5 @@ function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, v
     
     % Convert to throttle and brake values
     throttle = controller.ax_to_throttle(gear+2) * u * (u >= 0);
-    brake = controller.ax_to_brake * u * (u < 0);
+    brake = - controller.ax_to_brake * u * (u < 0);
 end

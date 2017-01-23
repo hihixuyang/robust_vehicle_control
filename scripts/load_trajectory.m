@@ -1,7 +1,6 @@
-function [trajectory] = load_trajectory(filename, ay_max)
+function [trajectory] = load_trajectory(filename)
     % load_trajectory Loads trajectory information from csv file
     %    Inputs: filename - Filename for trajectory to be loaded
-    %            ay_max   - Maximum lateral acceleration for speed profile
     %
     %    Outputs: trajectory - Trajectory structure
     %                 trajectory.s     - Alongtrack distance reference
@@ -18,14 +17,9 @@ function [trajectory] = load_trajectory(filename, ay_max)
     trajectory = struct();
     
     % Load curvature profile
-    trajectory.s = X(1:10:end,1);
-    trajectory.kappa = X(1:10:end,2);
-    
-    % Calculate maximum constant velocity profile
-    vx_max = min(sqrt(ay_max ./ abs(X(1:10:end,2))));
-    
-    % Set constant velocity trajectory
-    trajectory.vx = vx_max * ones(size(X(1:10:end,2)));
-    trajectory.ax = zeros(size(X(1:10:end,2)));
+    trajectory.s = X(1:end,1);
+    trajectory.kappa = X(1:end,2);
+    trajectory.vx = X(1:end,3);
+    trajectory.ax = X(1:end,4);
 end
 

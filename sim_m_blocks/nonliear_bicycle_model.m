@@ -75,6 +75,10 @@ function [dx, ax] = nonliear_bicycle_model(x, u, kappa, mu, ax_prev, param)
     slip_f = atan2(vy + a * r, vx) - delta_f;
     slip_r = atan2(vy - b * r, vx) - delta_r;
     
+    % Limit longitudinal force by normal load
+    Fx_f = sign(Fx_f) * min(abs(Fx_f), 0.99 * Fz_f * mu_f);
+    Fx_r = sign(Fx_r) * min(abs(Fx_r), 0.99 * Fz_r * mu_r);
+    
     Fy_f = fiala_model(slip_f, sqrt(max(0, Fz_f^2 - (Fx_f / mu_f)^2)), mu_f, param.front_tire);
     Fy_r = fiala_model(slip_r, sqrt(max(0, Fz_r^2 - (Fx_r / mu_r)^2)), mu_r, param.rear_tire);
     

@@ -28,6 +28,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     chassis_dx    = simulation_log.get('chassis_state_derivative').Values.Data;
     chassis_u     = simulation_log.get('chassis_control_inputs').Values.Data;
     chassis_mu    = simulation_log.get('chassis_friction_coeffs').Values.Data;
+    chassis_kappa = simulation_log.get('chassis_curvature').Values.Data;
     
     has_observer = strcmp(simulation_log.getElementNames{end},'observer_state');
     
@@ -130,8 +131,16 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     plot(t, 24 * ones(size(t)), 'k-.')
     set(gca, 'FontSize', scale*4)
     xlabel('Time - t [s]', 'FontSize', scale*8)
-    ylabel('Steering angle - \delta_f [-]', 'FontSize', scale*8)
+    ylabel('Steering angle - \delta_f [\circ]', 'FontSize', scale*8)
     xlim([0, max(t)])
+    
+    subplot(3,3,7)
+    grid on;
+    hold on;
+    plot(t, chassis_kappa)
+    set(gca, 'FontSize', scale*4)
+    xlabel('Time - t [s]', 'FontSize', scale*8)
+    ylabel('Curvature - \kappa [1/m]', 'FontSize', scale*8)
 
     % Slip Envelopes
     a = vehicle_parameters.body.a;

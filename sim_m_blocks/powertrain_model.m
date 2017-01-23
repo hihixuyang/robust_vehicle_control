@@ -28,7 +28,7 @@ function [fxf, gear_next] = powertrain_model(throttle, x, gear, param)
     % Perform motor mapping
     engine_rpm = x(4) / wheel_radius * gear_ratio * diff_ratio / efficiency * 60 / 2 / pi;
     torque_max = interp1(param.engine_rpm_map, ...
-                         param.engine_torque_map, engine_rpm);
+                         param.engine_torque_map, min(param.engine_rpm_map(end), engine_rpm));
     torque = throttle * torque_max;  % At the engine
     fxf = torque * gear_ratio * diff_ratio * efficiency / wheel_radius;
 
