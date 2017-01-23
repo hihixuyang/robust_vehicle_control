@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.472"
+    ComputedModelVersion    "1.489"
     NumModelReferences	    0
     NumTestPointedSignals   5
     TestPointedSignal {
@@ -75,7 +75,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [50.0, 23.0, 1870.0, 1177.0]
+      Location		      [52.0, 23.0, 1868.0, 1177.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -84,7 +84,7 @@ Model {
 	DockPosition		"Left"
 	Width			[50]
 	Height			[50]
-	Filter			[9]
+	Filter			[8]
       }
       Object {
 	$PropName		"ExplorerBarInfo"
@@ -94,40 +94,22 @@ Model {
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		4
+	Dimension		2
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1836.0, 1004.0]
+	  Extents		  [1834.0, 1004.0]
 	  ZoomFactor		  [1.320672023374726]
-	  Offset		  [-340.60066371681421, -177.60951327433628]
+	  Offset		  [-340.60066371681421, -177.60951327433605]
 	}
 	Object {
 	  $ObjectID		  7
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "42"
-	  Extents		  [1836.0, 1004.0]
-	  ZoomFactor		  [2.38]
-	  Offset		  [0.0, 0.0]
-	}
-	Object {
-	  $ObjectID		  8
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "97"
-	  Extents		  [1836.0, 1004.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-3.3125, 0.0]
-	}
-	Object {
-	  $ObjectID		  9
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "18"
-	  Extents		  [1836.0, 1004.0]
+	  Extents		  [1834.0, 1004.0]
 	  ZoomFactor		  [2.25]
 	  Offset		  [0.0, 0.0]
 	}
@@ -141,9 +123,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "cmasserafilho"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Jan 20 04:13:34 2017"
-  RTWModifiedTimeStamp	  406786414
-  ModelVersionFormat	  "1.%<AutoIncrement:472>"
+  LastModifiedDate	  "Mon Jan 23 00:48:43 2017"
+  RTWModifiedTimeStamp	  407033321
+  ModelVersionFormat	  "1.%<AutoIncrement:489>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -185,7 +167,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    10
+    $ObjectID		    8
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "sim_environment"
     overrideMode_	    [0.0]
@@ -229,13 +211,13 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      11
+      $ObjectID		      9
       Version		      "1.15.1"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  12
+	  $ObjectID		  10
 	  Version		  "1.15.1"
 	  StartTime		  "0.0"
 	  StopTime		  "simulation_parameters.t_end"
@@ -272,7 +254,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  13
+	  $ObjectID		  11
 	  Version		  "1.15.1"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -308,7 +290,7 @@ Model {
 	  LoggingIntervals	  "[-inf, inf]"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  14
+	  $ObjectID		  12
 	  Version		  "1.15.1"
 	  Array {
 	    Type		    "Cell"
@@ -365,7 +347,7 @@ Model {
 	  AccelVerboseBuild	  off
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  15
+	  $ObjectID		  13
 	  Version		  "1.15.1"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -455,7 +437,7 @@ Model {
 	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  16
+	  $ObjectID		  14
 	  Version		  "1.15.1"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -495,7 +477,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  17
+	  $ObjectID		  15
 	  Version		  "1.15.1"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  EnableRefExpFcnMdlSchedulingChecks on
@@ -511,7 +493,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  18
+	  $ObjectID		  16
 	  Version		  "1.15.1"
 	  SFSimEcho		  on
 	  SimCtrlC		  on
@@ -523,7 +505,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  19
+	  $ObjectID		  17
 	  Version		  "1.15.1"
 	  Array {
 	    Type		    "Cell"
@@ -592,7 +574,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      20
+	      $ObjectID		      18
 	      Version		      "1.15.1"
 	      Array {
 		Type			"Cell"
@@ -664,7 +646,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      21
+	      $ObjectID		      19
 	      Version		      "1.15.1"
 	      Array {
 		Type			"Cell"
@@ -749,7 +731,7 @@ Model {
 	  }
 	}
 	SlCovCC.ConfigComp {
-	  $ObjectID		  22
+	  $ObjectID		  20
 	  Version		  "1.15.1"
 	  Description		  "Simulink Coverage Configuration Component"
 	  Name			  "Simulink Coverage"
@@ -776,7 +758,7 @@ Model {
 	  CovStopTime		  0
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  23
+	  $ObjectID		  21
 	  Version		  "1.15.1"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -798,11 +780,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    11
+    $ObjectID		    9
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    24
+    $ObjectID		    22
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1060,7 +1042,7 @@ Model {
   }
   System {
     Name		    "sim_environment_gcc"
-    Location		    [50, 23, 1920, 1200]
+    Location		    [52, 23, 1920, 1200]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1311,7 +1293,7 @@ Model {
       Variant		      off
       System {
 	Name			"Chassis"
-	Location		[50, 23, 1920, 1200]
+	Location		[52, 23, 1920, 1200]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2333,7 +2315,7 @@ Model {
       System {
 	Name			"Powertrain System"
 	Location		[50, 23, 1920, 1200]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -3261,8 +3243,6 @@ Stateflow {
     created		    "05-Aug-2016 10:42:47"
     isLibrary		    0
     firstTarget		    60
-    debug {
-    }
     sfVersion		    80000006
   }
   chart {
@@ -3468,8 +3448,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [dx, ax] = bicycle_model_wrapper(x, u, kappa, mu, ax_prev, vehicle_parameters)\n\n    [d"
-      "x, ax] = nonliear_bicycle_model(x, u, kappa, mu, ax_prev, vehicle_parameters);\n    \nend"
+      script		      "function [dx, ax] = bicycle_model_wrapper(x, u, kappa, mu, ax_prev, vehicle_parameters)\n    \n  "
+      "  [dx, ax] = nonliear_bicycle_model(x, u, kappa, mu, ax_prev, vehicle_parameters);\n\nend"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -3693,10 +3673,7 @@ Stateflow {
     firstTransition	    33
     firstJunction	    32
     viewObj		    24
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    15
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -4185,10 +4162,7 @@ Stateflow {
     firstTransition	    58
     firstJunction	    57
     viewObj		    49
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    16
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
