@@ -7,12 +7,13 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     %                vehicle_parameters.h  - Distance from cg to ground (z) [m]
     %                vehicle_parameters.Iz - Yaw moment of inertia [Kgm^2/rad]
     %                vehicle_parameters.g  - Gravity acceleration [m/s^2]
-    %                vehicle_parameters.front_tire
     %                    front_tire.C  - Cornering stiffness [N/rad]
     %                    front_tire.Ru - Radio between frictions [-]
-    %                vehicle_parameters.rear_tire
+    %                    front_tire.mu - Road/tire static friction [-]
+    %                param.rear_tire
     %                    rear_tire.C  - Cornering stiffness [N/rad]
     %                    rear_tire.Ru - Radio between frictions [-]
+    %                    rear_tire.mu - Road/tire static friction [-]
     %            controller_parameters - Controller parameter structure
     %                controller_parameters.Ts - Controller sampling time
     %                controller_parameters.tau - Target time constants
@@ -51,11 +52,11 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
 
     % Gain scheduling velocity range
     vx_min = 2;
-    vx_max = 40;
+    vx_max = 35;
     vx_list = (vx_min:vx_max)';
 
     % Query for matrix sizes
-    [A, Bu, Br, ~] = linear_bicycle_model_uncertain(1, [0.9, 0.9], vehicle_parameters);
+    [A, Bu, Br, ~] = linear_bicycle_model_uncertain(1, vehicle_parameters);
 
     Nx = size(A, 2);
     Nu = size(Bu, 2);
@@ -74,7 +75,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
 
         % Get continous time matrices in affine form
         [A, Bu, Br, Hc, Ea, Ebu, ~] = ...
-            linear_bicycle_model_uncertain(vx, [1, 1], vehicle_parameters);
+            linear_bicycle_model_uncertain(vx, vehicle_parameters);
 
         % Discretize uncertain system
         [F, G, H, Ef, Eg] = lct.uc2d(A, Bu, Hc, Ea, Ebu, controller_parameters.Ts);
@@ -102,7 +103,10 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
         R = R / trace(R);
 
         % Generate Guaranteed Cost Control gain
-        [K, P, e] = lct.gcc(F, G, 1000*H, Ef/1000, Eg/1000, Q, R);
+        H  = 1000 * H;
+        Ef = Ef / 1000;
+        Eg = Eg / 1000;
+        [K, P, e] = lct.gcc(F, G, H, Ef, Eg, Q, R);
 
         % Calculate zero DC gain feed-forward term w.r.t crosstrack error
         Ftilda = F - G * K;
@@ -116,7 +120,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
         X = inv(inv(P) - (H * e * H'));
         K_list(i, :, :) = K;
         P_list(i, :, :) = P;
-        Rbar_list(i, :, :) = R + Ebu' * inv(e) * Ebu + G' * X * G;
+        Rbar_list(i, :, :) = R + Eg' * inv(e) * Eg + G' * X * G;
     end
 
     % Create controller structure

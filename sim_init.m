@@ -40,11 +40,13 @@ vehicle_parameters.body.dy = - b;
 
 % Front tire params
 vehicle_parameters.front_tire.C = 120000;
-vehicle_parameters.front_tire.Ru = 0.8;
+vehicle_parameters.front_tire.Ru = 0.9;
+vehicle_parameters.front_tire.mu = 0.9;
 
 % Rear tire params
 vehicle_parameters.rear_tire.C = 160000;
-vehicle_parameters.rear_tire.Ru = 0.8;
+vehicle_parameters.rear_tire.Ru = 0.9;
+vehicle_parameters.rear_tire.mu = 0.9;
 
 % Aerodynamical params
 vehicle_parameters.aero.CdA = 1.49 * 1.64 * 0.3;
@@ -92,11 +94,11 @@ vehicle_parameters.brake.wheel_radius = 0.33;
 vehicle_parameters.world.g = 9.81;
 
 % Uncertainty params
-vehicle_parameters.uncertainty.C_f = 0.2 * vehicle_parameters.front_tire.C;
-vehicle_parameters.uncertainty.Ru_f = 0.1 * vehicle_parameters.front_tire.Ru;
+vehicle_parameters.uncertainty.C_f = 0.25 * vehicle_parameters.front_tire.C;
+vehicle_parameters.uncertainty.Ru_f = 0.1;
 vehicle_parameters.uncertainty.mu_f = 0.1;
-vehicle_parameters.uncertainty.C_r = 0.2 * vehicle_parameters.rear_tire.C;
-vehicle_parameters.uncertainty.Ru_r = 0.1 * vehicle_parameters.rear_tire.Ru;
+vehicle_parameters.uncertainty.C_r = 0.25 * vehicle_parameters.rear_tire.C;
+vehicle_parameters.uncertainty.Ru_r = 0.1;
 vehicle_parameters.uncertainty.mu_r = 0.1;
 
 display(['    Completed, ' num2str(toc) ' seconds elapsed'])
