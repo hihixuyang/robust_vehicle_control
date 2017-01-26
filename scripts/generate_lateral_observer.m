@@ -34,14 +34,14 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
 
     % Gain scheduling velocity range
     vx_min = 2;
-    vx_max = 40;
+    vx_max = 35;
     vx_list = (vx_min:vx_max)';
     
     % Observer subsampling rate
     ss = observer_parameters.subsampling;
 
     % Query for matrix sizes
-    [A, Bu, Br, Hc] = linear_bicycle_model_uncertain(1, [1, 1], vehicle_parameters);
+    [A, Bu, Br, Hc] = linear_bicycle_model_uncertain(1, vehicle_parameters);
 
     Nx = size(A, 2);
     Nu = size(Bu, 2);
@@ -64,7 +64,7 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
 
         % Get continous time matrices in affine form
         [A, Bu, ~, Hc, Ea, Ebu, ~] = ...
-            linear_bicycle_model_uncertain(vx, [1, 1], vehicle_parameters);
+            linear_bicycle_model_uncertain(vx, vehicle_parameters);
 
         % Discretize uncertain system
         [F, G, H, Ef, ~] = lct.uc2d(A, Bu, Hc, Ea, Ebu, observer_parameters.Ts);

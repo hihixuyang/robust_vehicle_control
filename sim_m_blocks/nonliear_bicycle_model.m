@@ -79,8 +79,8 @@ function [dx, ax] = nonliear_bicycle_model(x, u, kappa, mu, ax_prev, param)
     Fx_f = sign(Fx_f) * min(abs(Fx_f), 0.99 * Fz_f * mu_f);
     Fx_r = sign(Fx_r) * min(abs(Fx_r), 0.99 * Fz_r * mu_r);
     
-    Fy_f = fiala_model(slip_f, sqrt(max(0, Fz_f^2 - (Fx_f / mu_f)^2)), mu_f, param.front_tire);
-    Fy_r = fiala_model(slip_r, sqrt(max(0, Fz_r^2 - (Fx_r / mu_r)^2)), mu_r, param.rear_tire);
+    Fy_f = fiala_model(slip_f, sqrt(max(0, Fz_f^2 - (Fx_f / mu_f)^2)), param.front_tire);
+    Fy_r = fiala_model(slip_r, sqrt(max(0, Fz_r^2 - (Fx_r / mu_r)^2)), param.rear_tire);
     
     Fx_aero = - sign(vx) * CdA * rho * vx ^ 2;
     

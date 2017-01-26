@@ -1,11 +1,11 @@
-function Fy = fiala_model(slip, Fz, mu, param)
+function Fy = fiala_model(slip, Fz, param)
     % fiala_model Fiala tire model for lateral tire forces
     %    Inputs: slip  - Sideslip angle [rad]
     %            Fz    - Normal tire force
-    %            mu    - Tire friction
     %            param - Parameter structure
-    %                param.C - Tire cornering stiffness [N/rad]
+    %                param.C  - Tire cornering stiffness [N/rad]
     %                param.Ru - Radio between frictions [-]
+    %                param.mu - Tire friction [-]
     %
     %    Outputs: Fy - Lateral tire force [N]
     %
@@ -15,6 +15,7 @@ function Fy = fiala_model(slip, Fz, mu, param)
     % Load parameters
     C = param.C;
     Ru = param.Ru;
+    mu = param.mu;
     
     % Compensate for polynomial peak decrease when Ru < 1
     mu = mu/abs((Ru/3 - 2/3)/((2*Ru)/3 - 1)^2 - ...

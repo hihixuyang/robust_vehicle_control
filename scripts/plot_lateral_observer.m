@@ -47,7 +47,7 @@ function plot_lateral_observer(vehicle_parameters, controller_parameters, ...
         
          % Get continous time matrices in affine form
         [A, Bu, ~, Hc, Ea, Ebu, ~] = ...
-            linear_bicycle_model_uncertain(vx, [1, 1], vehicle_parameters);
+            linear_bicycle_model_uncertain(vx, vehicle_parameters);
         
         % Discretize uncertain system
         [F, G, H, Ef, Eg] = lct.uc2d(A, Bu, Hc, Ea, Ebu, controller_parameters.Ts);
