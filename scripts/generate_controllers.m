@@ -51,7 +51,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     W = controller_parameters.W;
 
     % Gain scheduling velocity range
-    vx_min = 2;
+    vx_min = 1;
     vx_max = 35;
     vx_list = (vx_min:vx_max)';
 

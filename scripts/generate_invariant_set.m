@@ -38,7 +38,7 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
     %                     lateral.F              - State transition matrix w.r.t vx [-]
     %                     lateral.G              - Control input matrix w.r.t vx [-]
     %                     lateral.offset         - YALMIP optimizer for invariant set
-    %                     lateral.inv_set        - Invariant set polytope
+    %                     lateral.inv_sets       - Array of invariant set polytopes
     %                 controller.longitudinal - Longitudinal controller gain structure
     %                     longitudinal.K              - Controller gains w.r.t vx [-]
     %                     longitudinal.P              - Closed loop cost matrix w.r.t vx [-]
@@ -50,7 +50,7 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
     %    Instituition: University of São Paulo
 
     % Invariant cone set V-rep points
-    points = [];
+    inv_sets = Polyhedron([]);
     
     % Get velocity list
     vx_list = controller.lateral.vx;
@@ -116,7 +116,7 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
         %     - a_r_max vx <= vy - b r <= a_r_max vx
         %     - a_f_max vx <= vy + a r - delta_f <= a_f_max vx
         %     - u_max <= u <= u_max
-        state_mask = [1:2];  % Mask for states (discard inputs)
+        state_mask = 1:2;  % Mask for states (discard inputs)
 
         u_max = param.steering.angle_limit;  % Maximum steering angle
 
@@ -147,8 +147,8 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
             % Initialize invariant set as feasible set
             inv_set_new = x;
             % Calculate a one step set for each vertex of matrix uncertain polytope
-            for i = 1:n_sys
-                one_step_i = Polyhedron(inv_set.A * [F_vertex(:,:,i) Gu_vertex(:,:,i)], inv_set.b);
+            for j = 1:n_sys
+                one_step_i = Polyhedron(inv_set.A * [F_vertex(:,:,j) Gu_vertex(:,:,j)], inv_set.b);
                 inv_set_new = inv_set_new.intersect(one_step_i);
             end
             % Project to state space
@@ -163,37 +163,31 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
             end
         end
 
-        inv_set = inv_set.computeVRep();
-        points_vx = inv_set.V;
-        points = [points;
-                  [points_vx ones(size(points_vx,1),1) * vx]];
+        inv_sets(i) = inv_set.minHRep();
     end
 
-    % Generate new invariant set cone for all speeds based on V-Rep points
-    inv_set = Polyhedron('V', points).minHRep();
-
-    % Construct YALMIP optimization problem based on this cone
-    x = sdpvar(n_x,1);                    % State vector [vy, r]
-    u = sdpvar(n_u,1);                    % Controller input [delta_f]
-    v = sdpvar(n_u,1);                    % Feasibility offset vector [delta_f]
-    vx = sdpvar();                        % Current longitudinal velocity [v_x]
-    f = sdpvar(n_x, n_x, n_sys, 'full');  % State transition matrix vertexes
-    g = sdpvar(n_x, n_u, n_sys, 'full');  % Control input matrix vertexes
-    r_bar = sdpvar(n_u, n_u);             % v cost hessian
-
-    % Create constraint set
-    constraints = [];
-    for i = 1:n_sys
-        constraints = [constraints;
-                       inv_set.A * [f(:,:,i) * x + g(:,:,i) * (u + v); vx] <= inv_set.b];
-    end
-
-    % Define optimization problem
-    options = sdpsettings('solver', '+gurobi', 'verbose', 0);
-    solver = optimizer(constraints, v' * r_bar * v, options, [x; u; vx; r_bar; f(:); g(:)], v);
-    
-    controller.lateral.F = F_list;
-    controller.lateral.G = Gu_list;
-    controller.lateral.inv_set = inv_set;
-    controller.lateral.offset = solver;
+%     % Construct YALMIP optimization problem based on this cone
+%     x = sdpvar(n_x,1);                    % State vector [vy, r]
+%     u = sdpvar(n_u,1);                    % Controller input [delta_f]
+%     v = sdpvar(n_u,1);                    % Feasibility offset vector [delta_f]
+%     vx = sdpvar();                        % Current longitudinal velocity [v_x]
+%     f = sdpvar(n_x, n_x, n_sys, 'full');  % State transition matrix vertexes
+%     g = sdpvar(n_x, n_u, n_sys, 'full');  % Control input matrix vertexes
+%     r_bar = sdpvar(n_u, n_u);             % v cost hessian
+% 
+%     % Create constraint set
+%     constraints = [];
+%     for i = 1:n_sys
+%         constraints = [constraints;
+%                        inv_set.A * [f(:,:,i) * x + g(:,:,i) * (u + v); vx] <= inv_set.b];
+%     end
+% 
+%     % Define optimization problem
+%     options = sdpsettings('solver', '+gurobi', 'verbose', 0);
+%     solver = optimizer(constraints, v' * r_bar * v, options, [x; u; vx; r_bar; f(:); g(:)], v);
+%     
+%     controller.lateral.F = F_list;
+%     controller.lateral.G = Gu_list;
+    controller.lateral.inv_sets = inv_sets;
+%     controller.lateral.offset = solver;
 end
