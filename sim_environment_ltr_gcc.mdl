@@ -810,7 +810,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Data Import//Export"
-      ConfigPrmDlgPosition     [ 740, 356, 1820, 1040 ] 
+      ConfigPrmDlgPosition     [ 740, 356, 1820, 1040 ]
     }
     PropName		    "ConfigurationSets"
   }

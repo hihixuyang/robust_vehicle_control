@@ -51,13 +51,13 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
 
     % Invariant cone set V-rep points
     inv_sets = Polyhedron([]);
-    
+
     % Get velocity list
     vx_list = controller.lateral.vx;
-    
+
     % Fetch vehicle parameters
     param = vehicle_parameters;
-    
+
     % Get system size
     [~, Bu, ~, Hc] = linear_bicycle_model_uncertain(1, param);
     n_x = 2;
@@ -71,11 +71,11 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
     % Calculate the invariant set for every speed a controller was designed
     for i = 1:length(vx_list)
         vx = vx_list(i);
-        display(['        Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
+        disp(['        Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
 
         % Load uncertain model
         [A, Bu, ~, Hc, Ea, Ebu, ~, slip_max] = linear_bicycle_model_uncertain(vx, param);
-        
+
         % Get system size
         n_x = size(A,2);
         n_u = size(Bu,2);
@@ -108,7 +108,7 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
             F_vertex(:,:,j) = F + H * Delta * Ef;
             Gu_vertex(:,:,j) = Gu + H * Delta * Egu;
         end
-        
+
         F_list(i,:,:,:) = F_vertex;
         Gu_list(i,:,:,:) = Gu_vertex;
 
@@ -174,18 +174,18 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
 %     f = sdpvar(n_x, n_x, n_sys, 'full');  % State transition matrix vertexes
 %     g = sdpvar(n_x, n_u, n_sys, 'full');  % Control input matrix vertexes
 %     r_bar = sdpvar(n_u, n_u);             % v cost hessian
-% 
+%
 %     % Create constraint set
 %     constraints = [];
 %     for i = 1:n_sys
 %         constraints = [constraints;
 %                        inv_set.A * [f(:,:,i) * x + g(:,:,i) * (u + v); vx] <= inv_set.b];
 %     end
-% 
+%
 %     % Define optimization problem
 %     options = sdpsettings('solver', '+gurobi', 'verbose', 0);
 %     solver = optimizer(constraints, v' * r_bar * v, options, [x; u; vx; r_bar; f(:); g(:)], v);
-%     
+%
 %     controller.lateral.F = F_list;
 %     controller.lateral.G = Gu_list;
     controller.lateral.inv_sets = inv_sets;

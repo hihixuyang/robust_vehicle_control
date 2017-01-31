@@ -21,4 +21,3 @@ function [ Fy_max, slip_max ] = peak_fiala_model(Fz, mu, param)
     q = (1 - 2 * Ru / 3)^(-1);
     slip_max = atan2(q * Fy_max, C);
 end
-

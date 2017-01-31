@@ -29,9 +29,9 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     chassis_u     = simulation_log.get('chassis_control_inputs').Values.Data;
     chassis_mu    = simulation_log.get('chassis_friction_coeffs').Values.Data;
     chassis_kappa = simulation_log.get('chassis_curvature').Values.Data;
-    
+
     has_observer = strcmp(simulation_log.getElementNames{end},'observer_state');
-    
+
     if has_observer
         observer_t = simulation_log.get('observer_state').Values.Time;
         observer_x = simulation_log.get('observer_state').Values.Data;
@@ -133,7 +133,7 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     xlabel('Time - t [s]', 'FontSize', scale*8)
     ylabel('Steering angle - \delta_f [\circ]', 'FontSize', scale*8)
     xlim([0, max(t)])
-    
+
     subplot(3,3,7)
     grid on;
     hold on;
@@ -168,12 +168,12 @@ function plot_sim_results(simulation_log, vehicle_parameters, name)
     set(gca, 'FontSize', scale*4)
     xlabel('Rear Sideslip angle - \alpha_r [\circ]', 'FontSize', scale*8)
     ylabel('Lat. acceleration - a_y [m/s^2]', 'FontSize', scale*8)
-    
+
     fig.Units = 'centimeters';
     fig.PaperUnits = 'centimeters';
     fig.PaperPosition = scale*[0 0 textwidth textwidth];
     fig.PaperSize = scale*[textwidth textwidth];
-    
+
     drawnow;
     print(['results/' name '.png'], '-dpng', ['-r' num2str(300 / scale)])
 end

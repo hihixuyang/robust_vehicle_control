@@ -8,7 +8,7 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
     %            Eg - Input disturbance matrix (RHS)
     %            Q  - State cost matrix
     %            R  - Input cost matrix
-    %    
+    %
     %    Outputs: K - GCC gain matrix
     %             P - GCC cost matrix
     %             e - optimal epsilon

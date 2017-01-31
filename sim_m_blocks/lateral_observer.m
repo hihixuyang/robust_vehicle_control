@@ -15,12 +15,12 @@ function x_hat = lateral_observer(y, x_hat_prev, u_prev, kappa, observer, has_da
     %                observer.C           - Output matrix w.r.t vx [-]
     %                observer.subsampling - Number of timesteps between measurements
     %            has_data   - Flag for new measurement arrived
-    %    
+    %
     %    Outputs: x_hat - Current state estimate (s, ey, epsi, vx, vy, r)
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     vx = y(3);
     y = [y(1:2)];
 

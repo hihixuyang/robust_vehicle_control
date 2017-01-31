@@ -36,7 +36,7 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
     vx_min = 2;
     vx_max = 35;
     vx_list = (vx_min:vx_max)';
-    
+
     % Observer subsampling rate
     ss = observer_parameters.subsampling;
 
@@ -60,7 +60,7 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
     % Resulting observer will be gain scheduled in speed
     for i = 1:size(vx_list, 1)
         vx = vx_list(i);
-        display(['    Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
+        disp(['    Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
 
         % Get continous time matrices in affine form
         [A, Bu, ~, Hc, Ea, Ebu, ~] = ...
@@ -71,11 +71,11 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
 
         % Discretize reference matrix
         [~, ~, Gr, ~, ~] = lct.uc2d(A, Bu, Br, Ea, Ebu, observer_parameters.Ts);
-        
+
         % Initialize rotation matrix
         M = eye(Nx);
         M = [M(:,end), M(:,1:end-1)];
-        
+
         % Square up system
         Gbar = zeros(Nx, Nx * Nu);
         for j = 1:Nx
@@ -93,7 +93,7 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
         % Save related quantities for future gain scheduling
         L_list(i, :, :) = L;
         P_list(i, :, :) = P;
-        
+
         F_list(i, :, :) = F;
         G_list(i, :, :) = G;
         Gr_list(i, :, :) = Gr;
@@ -109,16 +109,16 @@ function observer = generate_lateral_observer(vehicle_parameters, observer_param
 
     observer.L = L_list;  % Observer gain matrix
     observer.P = P_list;  % Closed loop state cost matrix
-    
+
     % System dynamics
     observer.F = F_list;
     observer.G = G_list;
     observer.Gr = Gr_list;
-    
+
     % Output matrix
     observer.C = observer_parameters.C;
-    
+
     % Subsampling when compared to controller
     observer.subsampling = ss;
-    
+
 end

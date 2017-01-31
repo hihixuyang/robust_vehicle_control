@@ -18,7 +18,7 @@ function [A, Bu, Br] = linear_bicycle_model(vx, param)
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     % Load parameter for brevity
     m = param.body.m;
     l = param.body.l;
@@ -28,9 +28,9 @@ function [A, Bu, Br] = linear_bicycle_model(vx, param)
     dy = param.body.dy;
     Cf = param.front_tire.C;
     Cr = param.rear_tire.C;
-    
+
     delta_tc = param.steering.tc;
-    
+
     % Linear bicycle model
     % State: [ey, epsi, vy, r]
     % Input: [delta_f]
@@ -49,14 +49,14 @@ function [A, Bu, Br] = linear_bicycle_model(vx, param)
     Bb = zeros(2,1);
     Bb(1,1) = Cf / m;
     Bb(2,1) = a * Cf / Iz;
-    
+
     % Trajectory-referenced bicycle model
     % State: [ey, epsi, vy, r, delta_f]
     % Input: [delta_f_cmd]
     % Reference: [kappa]
     % Assumptions:
     %    Along-track distance (s) is not modeled
-    
+
 %     A = [0,      vx, 1, dy,         0;
 %          0,       0, 0,  1,         0;
 %          zeros(2,2),    Ab,        Bb;
@@ -64,7 +64,7 @@ function [A, Bu, Br] = linear_bicycle_model(vx, param)
     A = [0,      vx, 1, dy;
          0,       0, 0,  1;
          zeros(2,2),    Ab];
-    
+
 %     Bu = [zeros(4,1);
 %             delta_tc];
     Bu = [zeros(2,1);
@@ -77,4 +77,3 @@ function [A, Bu, Br] = linear_bicycle_model(vx, param)
                  -vx;
           zeros(2,1)];
 end
-
