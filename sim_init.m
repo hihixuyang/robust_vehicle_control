@@ -9,7 +9,7 @@ tic
 % Clean up
 clear all; close all; clc
 
-display('Initializing Simulation Environment')
+disp('Initializing Simulation Environment')
 
 % Add subfolders to path
 addpath('models')
@@ -20,11 +20,11 @@ addpath('sim_m_blocks')
 is_plotting_results = true;
 
 if is_plotting_results
-    display('    Warning: Intermediary results will be plotted')
+    disp('    Warning: Intermediary results will be plotted')
 end
 
 %% Define vehicle model parameters
-display('Setting vehicle parameters')
+disp('Setting vehicle parameters')
 
 vehicle_parameters = struct();
 
@@ -101,10 +101,10 @@ vehicle_parameters.uncertainty.C_r = 0.25 * vehicle_parameters.rear_tire.C;
 vehicle_parameters.uncertainty.Ru_r = 0.1;
 vehicle_parameters.uncertainty.mu_r = 0.1;
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed'])
+disp(['    Completed, ' num2str(toc) ' seconds elapsed'])
 
 %% Controller parameters
-display('Setting controller parameters')
+disp('Setting controller parameters')
 
 controller_parameters = struct();
 
@@ -117,10 +117,10 @@ controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
 controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2); 
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Observer parameters
-display('Setting observer parameters');
+disp('Setting observer parameters');
 
 observer_parameters = struct();
 
@@ -132,10 +132,10 @@ observer_parameters.subsampling = 4; % 10 Hz
 observer_parameters.rho = 1e-3;
 observer_parameters.C = eye(2,4);
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Simulation parameters
-display('Setting simulation parameters');
+disp('Setting simulation parameters');
 
 simulation_parameters = struct();
 
@@ -157,54 +157,64 @@ simulation_parameters.gps = struct();
 simulation_parameters.gps.C = [zeros(4,1) eye(4,5)];
 simulation_parameters.gps.Cov = diag([0.04, 0.5*pi/180, 0.006, 0.006]) ^ 2;
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Generate controller
-display('Generating controllers');
+disp('Generating controllers');
 
 controller = generate_controllers(vehicle_parameters, controller_parameters);
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Plot resulting controller frequency response
 if is_plotting_results
-    display('Plotting controller transfer functions');
+    disp('Plotting controller transfer functions');
     
     plot_lateral_controller(vehicle_parameters, controller_parameters, controller);
     
-    display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+    disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
 %% Generate invariant set
-display('Generating invariant set');
+disp('Generating invariant set');
 
 controller = generate_invariant_set(vehicle_parameters, controller_parameters, controller);
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
+
+%% Plot resulting invariant set
+if is_plotting_results
+    disp('Plotting invariant set');
+    
+    plot_invariant_set(controller);
+    
+    disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
+end
+
 
 %% Generate observer
-display('Generating robust observer w/ loop transfer recovery');
+disp('Generating robust observer w/ loop transfer recovery');
 
 observer = generate_lateral_observer(vehicle_parameters, observer_parameters);
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Plot resulting observer frequency response
 if is_plotting_results
-    display('Plotting robust observer transfer functions');
+    disp('Plotting robust observer transfer functions');
     
     plot_lateral_observer(vehicle_parameters, controller_parameters, observer_parameters, ...
                           controller, observer);
     
-    display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+    disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
 %% Save controller and observer to MAT file
-display('Generating controller and observer gains MAT file');
+disp('Generating controller and observer gains MAT file');
 
 save('vehicle_code/controller_gains.mat', 'controller', 'observer')
 
-display(['    Completed, ' num2str(toc) ' seconds elapsed']);
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Finish initialization
-display(['Initialization Completed in ' num2str(toc) ' seconds']);
+disp(['Initialization Completed in ' num2str(toc) ' seconds']);
