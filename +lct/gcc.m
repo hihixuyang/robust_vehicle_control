@@ -52,7 +52,7 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
                    N >= 0;
                    e >= 0];
 
-    opt = sdpsettings('solver', '+sedumi', 'verbose', 0);
+    opt = sdpsettings('solver', '+mosek', 'verbose', 0);
     sol = optimize(constraints, trace(S), opt);
 
     if sol.problem ~= 0
