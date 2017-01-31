@@ -9,27 +9,27 @@ function [u, opt_in] = lateral_control(x, kappa, controller)
     %                controller.K      - Controller gains w.r.t vx [-]
     %                controller.P      - Closed loop cost matrix w.r.t vx [-]
     %                controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
-    %    
+    %
     %    Outputs: u      - Control Input [rad]
     %             opt_in - Inputs to YALMIP optimizer [-]
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     % Get relevant states
     ey = x(2);    % Crosstrack error
     epsi = x(3);  % Heading error
     vx = x(4);    % Longitudinal velocity
     vy = x(5);    % Lateral velocity
     r = x(6);     % Yaw rate
-    
+
     % Create controller state vector
     x_ctrl = [ey; epsi; vy; r; kappa];
-    
+
     % Gain schedule controller gain w.r.t longitudinal velocity
     K = permute(interp1(controller.vx, controller.K, ...
                         max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 1]);
-    
+
     % Gain schedule system for invariant set
     F_vertex = permute(interp1(controller.vx, controller.F, ...
                        max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 4 1]);
@@ -37,7 +37,7 @@ function [u, opt_in] = lateral_control(x, kappa, controller)
                        max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 4 1]);
     R_bar = permute(interp1(controller.vx, controller.Rbar, ...
                     max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 1]);
-                    
+
     % Calculate control input
     u = - K * x_ctrl;
     opt_in = [vy; r; u; ...

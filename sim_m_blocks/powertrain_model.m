@@ -16,12 +16,12 @@ function [fxf, gear_next] = powertrain_model(throttle, x, gear, param)
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     wheel_radius = param.wheel_radius;
     gear_ratio = param.gear_ratio(gear + 2);
     diff_ratio = param.diff_ratio;
     efficiency = param.efficiency;
-    
+
     % Clip throttle
     throttle = max(min(throttle, 1), 0);
 
@@ -51,4 +51,3 @@ function [fxf, gear_next] = powertrain_model(throttle, x, gear, param)
         end
     end
 end
-

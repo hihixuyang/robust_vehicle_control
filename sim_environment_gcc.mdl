@@ -796,7 +796,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Hardware Implementation"
-      ConfigPrmDlgPosition     [ 740, 312, 1820, 1040 ] 
+      ConfigPrmDlgPosition     [ 740, 312, 1820, 1040 ]
     }
     PropName		    "ConfigurationSets"
   }

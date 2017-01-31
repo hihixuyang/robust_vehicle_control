@@ -1,5 +1,5 @@
 function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertain(vx, param)
-    % linear_bicycle_model_uncertain Generates the linear bicycle model matrices 
+    % linear_bicycle_model_uncertain Generates the linear bicycle model matrices
     %                                with tire parameter uncertainty
     %    Inputs: vx    - Vehicle longitudinal velocity [m/s]
     %            param - Parameter structure
@@ -29,32 +29,32 @@ function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertai
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     % Load parameter for brevity
     m = param.body.m;
     l = param.body.l;
     a = param.body.a;
     b = l - a;
     dy = param.body.dy;
-    
+
     g = param.world.g;
-    
+
     C_f = param.front_tire.C;
     Ru_f = param.front_tire.Ru;
     mu_f = param.front_tire.mu;
-    
+
     C_r = param.rear_tire.C;
     Ru_r = param.rear_tire.Ru;
     mu_r = param.rear_tire.mu;
-    
+
     % Tire parameters
     Fz_f = m * (b * g) / l;
     Fz_r = m * (a * g) / l;
-    
+
     % Maximum cornering stiffness is trivial
     C_f_max = C_f + param.uncertainty.C_f;
     C_r_max = C_r + param.uncertainty.C_r;
-    
+
     % Minimum cornering stiffness depends on tire saturation
     C_f_min = Inf;
     C_r_min = Inf;
@@ -64,7 +64,7 @@ function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertai
         sign_C = 2 * mod(floor(i / 4), 2) - 1;
         sign_Ru = 2 * mod(floor(i / 2), 2) - 1;
         sign_mu = 2 * mod(i, 2) - 1;
-        
+
         % Front tire
         tire_param = struct();
         tire_param.C = C_f + sign_C * param.uncertainty.C_f;
@@ -73,7 +73,7 @@ function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertai
         [Fy_max, slip_max] = peak_fiala_model(Fz_f, tire_param.mu, tire_param);
         C_f_min = min(C_f_min, Fy_max / slip_max);
         slip_f_max = min(slip_f_max, slip_max);
-        
+
         % Rear tire
         tire_param = struct();
         tire_param.C = C_r + sign_C * param.uncertainty.C_r;
@@ -83,12 +83,12 @@ function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertai
         C_r_min = min(C_r_min, Fy_max / slip_max);
         slip_r_max = min(slip_r_max, slip_max);
     end
-    
+
     % Calculate the intermediary plant
     param.front_tire.C = (C_f_max + C_f_min) / 2;
     param.rear_tire.C = (C_r_max + C_r_min) / 2;
     [A, Bu, Br] = linear_bicycle_model(vx, param);
-    
+
     % Calculate the uncertainty matrices
     dC_f = (C_f_max - C_f_min) / 2;
     dC_r = (C_r_max - C_r_min) / 2;
@@ -98,7 +98,6 @@ function [ A, Bu, Br, H, Ea, Ebu, Ebr, slip_max] = linear_bicycle_model_uncertai
     Ea = [zeros(2) Ea];
     Ebu = Ebu;
     Ebr = zeros(2, 1);
-    
+
     slip_max = [slip_f_max, slip_r_max];
 end
-

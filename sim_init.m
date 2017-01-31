@@ -115,7 +115,7 @@ controller_parameters.Ts = 2.5e-2; % 40Hz
 controller_parameters.tau = 1.5;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2); 
+controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2);
 
 disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -146,9 +146,9 @@ simulation_parameters.trajectory = load_trajectory('bandejao_hg.csv');
 % simulation_parameters.trajectory = load_trajectory('bloco_didatico_hg.csv');
 
 % Simulation initial state
-simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0; 
+simulation_parameters.x0 = [simulation_parameters.trajectory.s(1); 0; 0;
                             simulation_parameters.trajectory.vx(1); 0; 0];
-                        
+
 simulation_parameters.t_end = sum(diff(simulation_parameters.trajectory.s) ./ ...
                                   simulation_parameters.trajectory.vx(1:end-1));
 
@@ -169,9 +169,9 @@ disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 %% Plot resulting controller frequency response
 if is_plotting_results
     disp('Plotting controller transfer functions');
-    
+
     plot_lateral_controller(vehicle_parameters, controller_parameters, controller);
-    
+
     disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
@@ -185,9 +185,9 @@ disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 %% Plot resulting invariant set
 if is_plotting_results
     disp('Plotting invariant set');
-    
+
     plot_invariant_set(controller);
-    
+
     disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
@@ -202,10 +202,10 @@ disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 %% Plot resulting observer frequency response
 if is_plotting_results
     disp('Plotting robust observer transfer functions');
-    
+
     plot_lateral_observer(vehicle_parameters, controller_parameters, observer_parameters, ...
                           controller, observer);
-    
+
     disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 

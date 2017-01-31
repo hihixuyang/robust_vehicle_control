@@ -38,12 +38,12 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     %
     % Lateral Controller
     %
-    display(['    Generating lateral controller'])
-    
+    disp(['    Generating lateral controller'])
+
     % Cost basis definition
     tau = controller_parameters.tau;
     Qp = controller_parameters.C;
@@ -71,7 +71,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     % Resulting controller will be gain scheduled in speed
     for i = 1:size(vx_list, 1)
         vx = vx_list(i);
-        display(['        Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
+        disp(['        Iteration ' num2str(i, '%02.0f') ', vx = ' num2str(vx)])
 
         % Get continous time matrices in affine form
         [A, Bu, Br, Hc, Ea, Ebu, ~] = ...
@@ -110,7 +110,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
 
         % Calculate zero DC gain feed-forward term w.r.t crosstrack error
         Ftilda = F - G * K;
-        
+
         M1 = (Qp(1,:) / (eye(Nx) - F + G * K)) * Gr;
         M2 = (Qp(1,:) / (eye(Nx) - F + G * K)) * G;
         N = M2 \ M1;
@@ -126,7 +126,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     % Create controller structure
     controller = struct();
     controller.lateral = struct();
-    
+
 
     % Velocity information for gain scheduling lateral controller
     controller.lateral.vx = vx_list;
@@ -137,12 +137,12 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     controller.lateral.K = K_list;        % Controller gain matrix
     controller.lateral.P = P_list;        % Closed loop state cost matrix
     controller.lateral.Rbar = Rbar_list;  % Feasbility offset cost matrix
-    
+
     %
     % Longitudinal controller Controller
     %
-    display(['    Generating longitudinal controller'])
-    
+    disp(['    Generating longitudinal controller'])
+
     % Define system dynamics
     % State x = [ev_int; ev]
     % Input u = ax
@@ -152,25 +152,25 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
          0 0];
     B = [0; -1];
     Br = [0; 1];
-    
+
     % Discretize dynamics
     out = expm([A B Br; zeros(2,4)]);
     F = out(1:2, 1:2);
     G = out(1:2, 3);
     Gr = out(1:2, 4);
-    
+
     % Calculate discrete LQR
     Q = eye(2);
     R = 1;
     [K, P] = dlqr(F, G, Q, R);
-    
+
     % Calculate feedforward
     N = G \ Gr;
     K = [K, N];
-    
+
     % Get throttle and brake constants
     [ax_to_throttle, ax_to_brake] = longitudinal_model(vehicle_parameters);
-    
+
     % Create controller structure
     controller.longitudinal = struct();
     controller.longitudinal.K = K;
@@ -178,5 +178,5 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
     controller.longitudinal.Rbar = R + G' * P * G;
     controller.longitudinal.ax_to_throttle = ax_to_throttle;
     controller.longitudinal.ax_to_brake = ax_to_brake;
-    
+
 end

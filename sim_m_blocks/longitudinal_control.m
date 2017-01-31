@@ -10,20 +10,20 @@ function [throttle, brake, dvx_int] = longitudinal_control(vx, vx_ref, ax_ref, v
     %                controller.Rbar   - Feasibility offset cost matrix w.r.t vx [-]
     %                controller.ax_to_throttle - Ratio between acceleration and throttle pedal [-]
     %                controller.ax_to_brake    - Ratio between acceleration and brake pedal [-]
-    %    
+    %
     %    Outputs: throttle - Throttle command[rad]
     %             brake    - Brake command [rad]
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     % Create controller state vector
     x_ctrl = [vx_int; vx_ref - vx; ax_ref];
     dvx_int = vx_ref - vx;
-    
+
     % Calculate control input
     u = - controller.K * x_ctrl;
-    
+
     % Convert to throttle and brake values
     throttle = controller.ax_to_throttle(gear+2) * u * (u >= 0);
     brake = - controller.ax_to_brake * u * (u < 0);

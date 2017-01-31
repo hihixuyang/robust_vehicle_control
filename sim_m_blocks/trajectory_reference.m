@@ -13,10 +13,9 @@ function [ kappa, vx_ref, ax_ref ] = trajectory_reference(s, trajectory_params)
     %
     %    Author: Carlos M. Massera
     %    Instituition: University of São Paulo
-    
+
     kappa = interp1q(trajectory_params.s, trajectory_params.kappa, s);
     vx_ref = interp1q(trajectory_params.s, trajectory_params.vx, s);
     ax_ref = interp1q(trajectory_params.s, trajectory_params.ax, s);
 
 end
-
