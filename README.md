@@ -17,7 +17,9 @@ The Matlab source code in this repository requires:
 and
 
 - [YALMIP Toolbox](http://users.isy.liu.se/johanl/yalmip/)
-- [SeDuMi](http://sedumi.ie.lehigh.edu)
+- [Mosek](https://www.mosek.com/)
+
+Note: Mosek has free-licenses for Academia.
 
 ### Controller implementation (Python)
 
