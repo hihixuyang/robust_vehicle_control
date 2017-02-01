@@ -56,7 +56,7 @@ function [K, P, e] = gcc(F, G, H, Ef, Eg, Q, R)
     sol = optimize(constraints, trace(S), opt);
 
     if sol.problem ~= 0
-        warning('gcc:solver_failed','SeDuMi did not converge');
+        warning('gcc:solver_failed','Solver did not converge');
     end
 
     K = value(KPinv) / value(Pinv);
