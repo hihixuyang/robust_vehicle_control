@@ -155,7 +155,7 @@ simulation_parameters.t_end = sum(diff(simulation_parameters.trajectory.s) ./ ..
 % GPS parameters
 simulation_parameters.gps = struct();
 simulation_parameters.gps.C = [zeros(4,1) eye(4,5)];
-simulation_parameters.gps.Cov = diag([0.04, 0.5*pi/180, 0.006, 0.006]) ^ 2;
+simulation_parameters.gps.Cov = diag([0.01, 0.1*pi/180, 0.006, 0.006]) ^ 2;
 
 disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
