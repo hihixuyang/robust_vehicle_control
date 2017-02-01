@@ -44,7 +44,8 @@ function plot_invariant_set(controller)
     fig = figure(1);
     clf;
 
-    trisurf(k,points(:,1),points(:,2),points(:,3),'Facecolor','red')
+    plot(alphaShape(points(:,1),points(:,2),points(:,3), 4));
+    axis normal
     xlabel('Lateral velocity - v_y [m/s]', 'FontSize', scale*8)
     ylabel('Yaw rate - r [m/s]', 'FontSize', scale*8)
     zlabel('Longitudinal velocity - v_x [m/s]', 'FontSize', scale*8)
