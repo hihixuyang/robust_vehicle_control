@@ -106,7 +106,7 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
         H  = 1000 * H;
         Ef = Ef / 1000;
         Eg = Eg / 1000;
-        [K, P, e] = lct.gcc(F, G, H, Ef, Eg, Q, R);
+        [K, P, e] = lct.diag_gcc(F, G, H, Ef, Eg, Q, R);
 
         % Calculate zero DC gain feed-forward term w.r.t crosstrack error
         Ftilda = F - G * K;
@@ -117,10 +117,10 @@ function controller = generate_controllers(vehicle_parameters, controller_parame
         K = [K, N];
 
         % Save related quantities for future gain scheduling
-        X = inv(inv(P) - (H * e * H'));
+        X = inv(inv(P) - (H * diag(e) * H'));
         K_list(i, :, :) = K;
         P_list(i, :, :) = P;
-        Rbar_list(i, :, :) = R + Eg' * inv(e) * Eg + G' * X * G;
+        Rbar_list(i, :, :) = R + Eg' * inv(diag(e)) * Eg + G' * X * G;
     end
 
     % Create controller structure
