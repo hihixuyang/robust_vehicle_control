@@ -37,7 +37,6 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
     %                     lateral.Rbar           - Feasibility offset cost matrix w.r.t vx [-]
     %                     lateral.F              - State transition matrix w.r.t vx [-]
     %                     lateral.G              - Control input matrix w.r.t vx [-]
-    %                     lateral.offset         - YALMIP optimizer for invariant set
     %                     lateral.inv_sets       - Array of invariant set polytopes
     %                 controller.longitudinal - Longitudinal controller gain structure
     %                     longitudinal.K              - Controller gains w.r.t vx [-]
@@ -163,31 +162,10 @@ function [controller] = generate_invariant_set(vehicle_parameters, controller_pa
             end
         end
 
-        inv_sets(i) = inv_set.minHRep();
+        inv_sets(i, 1) = inv_set.minHRep();
     end
 
-%     % Construct YALMIP optimization problem based on this cone
-%     x = sdpvar(n_x,1);                    % State vector [vy, r]
-%     u = sdpvar(n_u,1);                    % Controller input [delta_f]
-%     v = sdpvar(n_u,1);                    % Feasibility offset vector [delta_f]
-%     vx = sdpvar();                        % Current longitudinal velocity [v_x]
-%     f = sdpvar(n_x, n_x, n_sys, 'full');  % State transition matrix vertexes
-%     g = sdpvar(n_x, n_u, n_sys, 'full');  % Control input matrix vertexes
-%     r_bar = sdpvar(n_u, n_u);             % v cost hessian
-%
-%     % Create constraint set
-%     constraints = [];
-%     for i = 1:n_sys
-%         constraints = [constraints;
-%                        inv_set.A * [f(:,:,i) * x + g(:,:,i) * (u + v); vx] <= inv_set.b];
-%     end
-%
-%     % Define optimization problem
-%     options = sdpsettings('solver', '+gurobi', 'verbose', 0);
-%     solver = optimizer(constraints, v' * r_bar * v, options, [x; u; vx; r_bar; f(:); g(:)], v);
-%
-%     controller.lateral.F = F_list;
-%     controller.lateral.G = Gu_list;
+    controller.lateral.F = F_list;
+    controller.lateral.G = Gu_list;
     controller.lateral.inv_sets = inv_sets;
-%     controller.lateral.offset = solver;
 end

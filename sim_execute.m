@@ -5,10 +5,10 @@
 
 %% Remove the polytope from controller struct (Simulink doesn't like it)
 controller_full = controller;
-controller.lateral.inv_set = 0;
-controller.lateral.offset = 0;
+controller.lateral.inv_sets = 0;
+controller.lateral.offset_opts = 0;
 
-offset_optimization = controller_full.lateral.offset;
+offset_optimization = controller_full.lateral.offset_opts;
 
 %% Run GCC simulation
 options = simset('SrcWorkspace','current');
