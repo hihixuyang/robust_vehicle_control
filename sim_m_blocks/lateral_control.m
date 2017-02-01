@@ -30,18 +30,8 @@ function [u, opt_in] = lateral_control(x, kappa, controller)
     K = permute(interp1(controller.vx, controller.K, ...
                         max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 1]);
 
-    % Gain schedule system for invariant set
-    F_vertex = permute(interp1(controller.vx, controller.F, ...
-                       max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 4 1]);
-    G_vertex = permute(interp1(controller.vx, controller.G, ...
-                       max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 4 1]);
-    R_bar = permute(interp1(controller.vx, controller.Rbar, ...
-                    max(min(vx, controller.vx_max), controller.vx_min), 'spline'), [2 3 1]);
-
     % Calculate control input
     u = - K * x_ctrl;
-    opt_in = [vy; r; u; ...
-              max(min(vx, controller.vx_max), controller.vx_min); ...
-              R_bar(:); F_vertex(:); G_vertex(:)];
+    opt_in = [vy; r; u; vx];
 
 end

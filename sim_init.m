@@ -7,7 +7,7 @@
 tic
 
 % Clean up
-clear all; close all; clc
+clear; close all; clc
 
 disp('Initializing Simulation Environment')
 
@@ -41,12 +41,12 @@ vehicle_parameters.body.dy = - b;
 % Front tire params
 vehicle_parameters.front_tire.C = 120000;
 vehicle_parameters.front_tire.Ru = 0.9;
-vehicle_parameters.front_tire.mu = 0.9;
+vehicle_parameters.front_tire.mu = 1.0;
 
 % Rear tire params
 vehicle_parameters.rear_tire.C = 160000;
 vehicle_parameters.rear_tire.Ru = 0.9;
-vehicle_parameters.rear_tire.mu = 0.9;
+vehicle_parameters.rear_tire.mu = 1.0;
 
 % Aerodynamical params
 vehicle_parameters.aero.CdA = 1.49 * 1.64 * 0.3;
@@ -115,7 +115,7 @@ controller_parameters.Ts = 2.5e-2; % 40Hz
 controller_parameters.tau = 1.5;
 controller_parameters.C = [1 0 0 0; 0 0 0 0];
 controller_parameters.D = [0; 1];
-controller_parameters.W = @(vx)(diag([max(vx, 5) / 4, 10 * pi / 180])^-2);
+controller_parameters.W = @(vx)(diag([max(vx, 5) / 6, 10 * pi / 180])^-2);
 
 disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
@@ -140,8 +140,8 @@ disp('Setting simulation parameters');
 simulation_parameters = struct();
 
 % Load trajectory
-% simulation_parameters.trajectory = load_trajectory('bandejao.csv');
-simulation_parameters.trajectory = load_trajectory('bandejao_hg.csv');
+simulation_parameters.trajectory = load_trajectory('bandejao.csv');
+% simulation_parameters.trajectory = load_trajectory('bandejao_hg.csv');
 % simulation_parameters.trajectory = load_trajectory('bloco_didatico.csv');
 % simulation_parameters.trajectory = load_trajectory('bloco_didatico_hg.csv');
 
@@ -191,6 +191,12 @@ if is_plotting_results
     disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 end
 
+%% Generate RMPC
+disp('Generating constrained optimal controller');
+
+controller = generate_rmpc(vehicle_parameters, controller);
+
+disp(['    Completed, ' num2str(toc) ' seconds elapsed']);
 
 %% Generate observer
 disp('Generating robust observer w/ loop transfer recovery');
